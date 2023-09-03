@@ -1,0 +1,16 @@
+.component {
+  background-color: red;
+
+  &__hello {
+    color: blue;
+  }
+
+  &__world {
+    cursor: pointer;
+    color: yellow;
+
+    &:hover {
+      font-weight: 600;
+    }
+  }
+}
