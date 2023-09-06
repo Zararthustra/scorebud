@@ -1,16 +1,19 @@
-import { App } from 'antd';
 import { useState } from 'react';
 import { Outlet } from 'react-router-dom';
 
 import { Sidebar } from '@components/index';
+import { IPlayer } from '@interfaces/index';
 import AppContext, { IAppContext } from '@services/AppContext';
+import { getLS } from './localStorageService';
 
 const AppWrapper = () => {
   const [isOpenSidebar, setIsOpenSidebar] = useState<boolean>(false);
-  const [themeColor, setThemeColor] = useState<string>('#0f0');
+  const [players, setPlayers] = useState<IPlayer[]>(
+    JSON.parse(getLS('players') || '[]')
+  );
 
   return (
-    <AppContext.Provider value={{ themeColor, setThemeColor }}>
+    <AppContext.Provider value={{ players, setPlayers }}>
       <div className="flex">
         <Sidebar
           isOpenSidebar={isOpenSidebar}

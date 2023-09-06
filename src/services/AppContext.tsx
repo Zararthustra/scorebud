@@ -1,13 +1,20 @@
 import { createContext } from 'react';
 
+import { IPlayer } from '@interfaces/index';
+
 export interface IAppContext {
-  themeColor: string;
-  setThemeColor: (value: string) => void;
+  players: IPlayer[];
+  setPlayers: (value: IPlayer[]) => void;
 }
 
 const AppContext = createContext<IAppContext>({
-  themeColor: '#000',
-  setThemeColor: () => null
+  players: [
+    {
+      name: 'Joueur 1',
+      scores: []
+    }
+  ],
+  setPlayers: () => null
 });
 
 export default AppContext;

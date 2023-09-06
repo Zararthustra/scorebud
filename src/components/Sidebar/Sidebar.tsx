@@ -3,12 +3,10 @@ import { useMediaQuery } from 'react-responsive';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 
 import {
-  IconHome,
-  IconOnOff,
-  IconParameter,
+  IconReset,
   IconSidebarClose,
   IconSidebarOpen,
-  IconUser
+  IconTable
 } from '@assets/index';
 import { clearLS } from '@services/localStorageService';
 
@@ -68,18 +66,17 @@ const Sidebar = ({ isOpenSidebar, setIsOpenSidebar }: ISidebarProps) => {
               className="flex-col justify-between align-center mt-2"
               style={{ height: '100%' }}>
               <div className="flex-col gap-1 align-center">
-                {/* Home */}
+                {/* Score */}
                 <div className={location.pathname === '/' ? 'active-item' : ''}>
-                  <IconHome
-                    width={40}
-                    height={30}
+                  <IconTable
+                    size={40}
                     className="sidebar__icon-item"
                     onClick={() => navigate('/')}
                   />
                 </div>
 
                 {/* Parameters */}
-                <div
+                {/* <div
                   className={
                     location.pathname === '/parametres' ? 'active-item' : ''
                   }>
@@ -89,13 +86,12 @@ const Sidebar = ({ isOpenSidebar, setIsOpenSidebar }: ISidebarProps) => {
                     className="sidebar__icon-item"
                     onClick={() => navigate('/parametres')}
                   />
-                </div>
+                </div> */}
               </div>
 
-              {/* Logout */}
-              <IconOnOff
-                width={35}
-                height={35}
+              {/* Reset */}
+              <IconReset
+                size={35}
                 className="sidebar__icon-logout"
                 onClick={handleReset}
               />
@@ -118,24 +114,23 @@ const Sidebar = ({ isOpenSidebar, setIsOpenSidebar }: ISidebarProps) => {
               className="flex-col justify-between mt-2"
               style={{ height: '100%' }}>
               <div className="flex-col gap-1">
-                {/* Home */}
+                {/* Score */}
                 <div className="sidebar__item">
                   <div
                     className={location.pathname === '/' ? 'active-item' : ''}>
-                    <IconHome
-                      width={40}
-                      height={30}
+                    <IconTable
+                      size={40}
                       className="sidebar__icon-item"
                       onClick={() => navigate('/')}
                     />
                   </div>
                   <Link className="sidebar__link" to="/">
-                    Accueil
+                    Scores
                   </Link>
                 </div>
 
                 {/* Parameters */}
-                <div className="sidebar__item">
+                {/* <div className="sidebar__item">
                   <div
                     className={
                       location.pathname === '/parametres' ? 'active-item' : ''
@@ -150,19 +145,18 @@ const Sidebar = ({ isOpenSidebar, setIsOpenSidebar }: ISidebarProps) => {
                   <Link className="sidebar__link" to="/parametres">
                     Paramètres
                   </Link>
-                </div>
+                </div> */}
               </div>
 
-              {/* Logout */}
+              {/* Reset */}
               <div className="sidebar__item">
-                <IconOnOff
-                  width={40}
-                  height={35}
+                <IconReset
+                  size={35}
                   className="sidebar__icon-logout"
                   onClick={handleReset}
                 />
                 <div className="sidebar__link" onClick={handleReset}>
-                  Déconnexion
+                  Reset
                 </div>
               </div>
             </div>

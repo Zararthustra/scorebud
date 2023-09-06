@@ -42,6 +42,17 @@ h6 {
   padding: 0;
 }
 
+h1 {
+  font-size: 2rem;
+}
+h2 {
+  font-size: 1.5rem;
+  font-weight: 300;
+}
+h3 {
+  font-size: 1.2rem;
+}
+
 // Widths
 .w-10 {
   width: 10%;
@@ -82,15 +93,15 @@ h6 {
 }
 /* Track */
 ::-webkit-scrollbar-track {
-  background: black;
+  background: var(--color-white);
 }
 /* Handle */
 ::-webkit-scrollbar-thumb {
-  background: white;
+  background: var(--color-primary-500);
 }
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
-  background: var(--light-color);
+  background: var(--color-primary-700);
 }
 
 ::selection {

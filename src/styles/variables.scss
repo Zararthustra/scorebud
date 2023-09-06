@@ -79,16 +79,16 @@
   --color-green-900: #01190f;
 
   // primary
-  --color-primary-50: #000;
-  --color-primary-100: #000;
-  --color-primary-200: #000;
-  --color-primary-300: #000;
-  --color-primary-400: #000;
-  --color-primary-500: #a343c9;
-  --color-primary-600: #000;
-  --color-primary-700: #722cb4;
-  --color-primary-800: #000;
-  --color-primary-900: #000;
+  --color-primary-50: #ffe8ec;
+  --color-primary-100: #ec5a7c;
+  --color-primary-200: #e65680;
+  --color-primary-300: #e05383;
+  --color-primary-400: #d94f86;
+  --color-primary-500: #d24c89;
+  --color-primary-600: #cb4a8b;
+  --color-primary-700: #c3488e;
+  --color-primary-800: #bb4690;
+  --color-primary-900: #b24592;
 
   // Neutral
   --color-white: #fff;
@@ -106,10 +106,13 @@
   --spacing-5: 3rem;
 
   // Border Radius
-  --rounded-sm: 3px;
-  --rounded-md: 5px;
-  --rounded-lg: 15px;
+  --rounded-s: 3px;
+  --rounded-m: 5px;
+  --rounded-l: 15px;
+  --rounded-xl: 20px;
   --rounded-full: 9999px;
+  --rounded-right: 0 99px 99px 0;
+  --rounded-left: 99px 0 0 99px;
 
   .br-s {
     border-radius: var(--rounded-s);
@@ -153,11 +156,26 @@ $sides: (
   y: top-bottom,
   x: left-right
 ) !default;
+$fonts: (
+  xs: var(--font-s),
+  s: var(--font-s),
+  m: var(--font-m),
+  l: var(--font-l),
+  xl: var(--font-xl),
+  xxl: var(--font-xxl)
+) !default;
 
 // Gaps
 @each $key, $rem in $rems {
   .gap-#{$key} {
     gap: #{$rem} !important;
+  }
+}
+
+// Font sizes
+@each $key, $font in $fonts {
+  .f-#{$key} {
+    font-size: #{$font} !important;
   }
 }
 

@@ -29,3 +29,5 @@ export { default as IconInfo } from './svg/IconInfo';
 export { default as IconPhone } from './svg/IconPhone';
 export { default as IconMail } from './svg/IconMail';
 export { default as IconTrash } from './svg/IconTrash';
+export { default as IconTable } from './svg/IconTable';
+export { default as IconReset } from './svg/IconReset';

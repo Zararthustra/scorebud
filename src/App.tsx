@@ -3,8 +3,9 @@ import { ConfigProvider, App as AntApp } from 'antd';
 import { useRegisterSW } from 'virtual:pwa-register/react';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 
-import { Component, ModalReloadSW } from '@components/index';
+import { Score } from '@pages/index';
 import AppWrapper from '@services/AppWrapper';
+import { ModalReloadSW } from '@components/index';
 
 const App = () => {
   const {
@@ -30,7 +31,7 @@ const App = () => {
     <ConfigProvider
       locale={frFR}
       theme={{
-        token: { colorPrimary: '#e77d00', borderRadius: 3 }
+        token: { colorPrimary: '#b24592', borderRadius: 3 }
       }}>
       <AntApp>
         <BrowserRouter>
@@ -42,11 +43,8 @@ const App = () => {
           />
           <Routes>
             <Route element={<AppWrapper />}>
-              <Route element={<Component hello={'Hello'} />} path="/" />
-              <Route
-                element={<Component hello={'Hola'} />}
-                path="/parametres"
-              />
+              <Route element={<Score />} path="/" />
+              {/* <Route element={<div>YO</div>} path="/parametres" /> */}
             </Route>
           </Routes>
         </BrowserRouter>

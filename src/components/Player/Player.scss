@@ -1,0 +1,11 @@
+.Player {
+  margin: 0;
+  width: fit-content;
+  background-color: var(--color-primary-50);
+  color: var(--color-primary-9400);
+  border: 1px solid var(--color-primary-700);
+  padding: 0rem 1.2rem;
+  border-radius: var(--rounded-full);
+  height: 100%;
+  white-space: nowrap;
+}

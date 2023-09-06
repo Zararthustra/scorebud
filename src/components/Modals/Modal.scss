@@ -1,0 +1,17 @@
+.ModalAddPlayers {
+  max-height: 30rem;
+  overflow: auto;
+
+  input {
+    outline: none;
+    border: none;
+  }
+}
+.ModalAddTurn {
+  input {
+    outline: none;
+    border: none;
+    width: 5rem;
+    border-bottom: 1px solid grey;
+  }
+}
