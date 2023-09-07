@@ -3,6 +3,11 @@
   z-index: 9;
   user-select: none;
 
+  &__logo {
+    width: 2.5rem;
+    margin-left: 1rem;
+  }
+
   &--open {
     width: 14.5rem;
   }
@@ -96,8 +101,16 @@
   position: fixed;
   background-color: var(--color-grey-100);
   width: 100%;
-  padding: 0 0 0.5rem 1rem;
+  padding: 0.5rem 0 0.5rem 1rem;
   z-index: 9;
+
+  &__title {
+    margin-right: 1rem;
+    font-size: 1.5rem;
+    line-height: 24px;
+    letter-spacing: 1px;
+    color: var(--color-primary-500);
+  }
 }
 
 @media screen and (max-width: 800px) {

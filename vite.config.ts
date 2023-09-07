@@ -17,25 +17,26 @@ export default defineConfig({
       // static assets in the public folder
       includeAssets: ['**/*'],
       manifest: {
-        theme_color: '#FAFAFA',
-        background_color: '#FAFAFA',
+        theme_color: '#FFF',
+        background_color: '#FFF',
         display: 'standalone',
         scope: '/',
         start_url: '/',
-        short_name: 'MY_PROJECT',
-        description: 'MY_PROJECT description',
-        name: 'MY_PROJECT',
+        short_name: 'Scorebud',
+        description:
+          "L'assistant compteur de score pour tous les jeux de société.",
+        name: 'Scorebud',
         icons: [
-          // {
-          //   src: '/logo-192.png',
-          //   sizes: '192x192',
-          //   type: 'image/png'
-          // },
-          // {
-          //   src: '/logo-512.png',
-          //   sizes: '512x512',
-          //   type: 'image/png'
-          // }
+          {
+            src: '/logo-192.png',
+            sizes: '192x192',
+            type: 'image/png'
+          },
+          {
+            src: '/logo-512.png',
+            sizes: '512x512',
+            type: 'image/png'
+          }
         ]
       }
     })

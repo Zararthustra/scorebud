@@ -6,7 +6,8 @@ import {
   IconReset,
   IconSidebarClose,
   IconSidebarOpen,
-  IconTable
+  IconTable,
+  logo
 } from '@assets/index';
 import { clearLS } from '@services/localStorageService';
 
@@ -33,12 +34,13 @@ const Sidebar = ({ isOpenSidebar, setIsOpenSidebar }: ISidebarProps) => {
 
   if (isMobile && !isOpenSidebar)
     return (
-      <div className="sidebar-mobile">
+      <div className="sidebar-mobile flex justify-between align-end">
         <IconSidebarOpen
           size={35}
-          className="sidebar__icon mt-1"
+          className="sidebar__icon"
           onClick={() => setIsOpenSidebar(!isOpenSidebar)}
         />
+        <h1 className="sidebar-mobile__title">Scorebud</h1>
       </div>
     );
 
@@ -103,7 +105,8 @@ const Sidebar = ({ isOpenSidebar, setIsOpenSidebar }: ISidebarProps) => {
         {isOpenSidebar && (
           <>
             <div className="flex justify-between mt-1 mr-1">
-              <div>LOGO</div>
+              <img src={logo} alt="Logo Scorebud" className="sidebar__logo" />
+
               <IconSidebarClose
                 size={35}
                 className="sidebar__icon"

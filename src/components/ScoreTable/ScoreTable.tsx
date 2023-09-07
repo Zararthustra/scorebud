@@ -22,7 +22,11 @@ const ScoreTable = ({ players }: IScoreTable) => {
         <table>
           <thead>
             <tr>
-              <th onClick={() => setShowModalAddTurn(true)}>+</th>
+              <th
+                onClick={() => setShowModalAddTurn(true)}
+                style={{ cursor: 'pointer' }}>
+                +
+              </th>
               {players.map((turn, index) => (
                 <th key={index} className="ScoreTable__column">
                   {turn.name}

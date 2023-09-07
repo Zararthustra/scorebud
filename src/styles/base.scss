@@ -37,13 +37,14 @@ h3,
 h4,
 h5,
 h6 {
-  font-family: var(--font-title);
+  font-family: var(--font-title-2);
   margin: 0;
   padding: 0;
 }
 
 h1 {
   font-size: 2rem;
+  font-family: var(--font-title);
 }
 h2 {
   font-size: 1.5rem;
