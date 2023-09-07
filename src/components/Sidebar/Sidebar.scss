@@ -24,6 +24,7 @@
     cursor: pointer;
     color: var(--color-grey-500);
     flex-shrink: 0;
+    height: 100%;
 
     &:hover {
       transition: color 0.3s var(--transition-bezier);
@@ -51,6 +52,7 @@
     padding-left: 0.5rem;
     svg {
       flex-shrink: 0;
+      height: 100%;
     }
   }
   &__link {

@@ -3,6 +3,7 @@ import { useMediaQuery } from 'react-responsive';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 
 import {
+  IconForest,
   IconReset,
   IconSidebarClose,
   IconSidebarOpen,
@@ -77,23 +78,23 @@ const Sidebar = ({ isOpenSidebar, setIsOpenSidebar }: ISidebarProps) => {
                   />
                 </div>
 
-                {/* Parameters */}
-                {/* <div
+                {/* LivingForest */}
+                <div
                   className={
-                    location.pathname === '/parametres' ? 'active-item' : ''
+                    location.pathname === '/living-forest' ? 'active-item' : ''
                   }>
-                  <IconParameter
+                  <IconForest
                     width={40}
-                    height={30}
+                    height={35}
                     className="sidebar__icon-item"
-                    onClick={() => navigate('/parametres')}
+                    onClick={() => navigate('/living-forest')}
                   />
-                </div> */}
+                </div>
               </div>
 
               {/* Reset */}
               <IconReset
-                size={35}
+                size={30}
                 className="sidebar__icon-logout"
                 onClick={handleReset}
               />
@@ -132,29 +133,31 @@ const Sidebar = ({ isOpenSidebar, setIsOpenSidebar }: ISidebarProps) => {
                   </Link>
                 </div>
 
-                {/* Parameters */}
-                {/* <div className="sidebar__item">
+                {/* LivingForest */}
+                <div className="sidebar__item">
                   <div
                     className={
-                      location.pathname === '/parametres' ? 'active-item' : ''
+                      location.pathname === '/living-forest'
+                        ? 'active-item'
+                        : ''
                     }>
-                    <IconParameter
+                    <IconForest
                       width={40}
-                      height={30}
+                      height={35}
                       className="sidebar__icon-item"
-                      onClick={() => navigate('/parametres')}
+                      onClick={() => navigate('/living-forest')}
                     />
                   </div>
-                  <Link className="sidebar__link" to="/parametres">
-                    Paramètres
+                  <Link className="sidebar__link" to="/living-forest">
+                    Living Forest
                   </Link>
-                </div> */}
+                </div>
               </div>
 
               {/* Reset */}
               <div className="sidebar__item">
                 <IconReset
-                  size={35}
+                  size={30}
                   className="sidebar__icon-logout"
                   onClick={handleReset}
                 />

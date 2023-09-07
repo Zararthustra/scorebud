@@ -5,6 +5,14 @@ export { default as customer3 } from './img/customer3.png';
 export { default as notfound } from './img/notfound.gif';
 export { default as blank_profile } from './img/blank_profile.png';
 export { default as logo } from './img/logo.png';
+// Living Forest
+export { default as sun } from './img/living_forest/sun.png';
+export { default as drop } from './img/living_forest/drop.png';
+export { default as move } from './img/living_forest/move.png';
+export { default as plant } from './img/living_forest/plant.png';
+export { default as fire } from './img/living_forest/fire.png';
+export { default as lotus } from './img/living_forest/lotus.png';
+export { default as tree } from './img/living_forest/tree.png';
 
 // Icons
 export { default as IconTemplate } from './svg/IconTemplate';
@@ -32,3 +40,6 @@ export { default as IconMail } from './svg/IconMail';
 export { default as IconTrash } from './svg/IconTrash';
 export { default as IconTable } from './svg/IconTable';
 export { default as IconReset } from './svg/IconReset';
+export { default as IconForest } from './svg/IconForest';
+export { default as IconTree } from './svg/IconTree';
+export { default as IconCards } from './svg/IconCards';

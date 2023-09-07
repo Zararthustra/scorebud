@@ -3,7 +3,7 @@ import { ConfigProvider, App as AntApp } from 'antd';
 import { useRegisterSW } from 'virtual:pwa-register/react';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 
-import { Score } from '@pages/index';
+import { LivingForest, Score } from '@pages/index';
 import AppWrapper from '@services/AppWrapper';
 import { ModalReloadSW } from '@components/index';
 
@@ -31,7 +31,12 @@ const App = () => {
     <ConfigProvider
       locale={frFR}
       theme={{
-        token: { colorPrimary: '#b24592', borderRadius: 3 }
+        token: { colorPrimary: '#b24592', borderRadius: 3 },
+        components: {
+          Tabs: {
+            horizontalMargin: '0'
+          }
+        }
       }}>
       <AntApp>
         <BrowserRouter>
@@ -44,7 +49,7 @@ const App = () => {
           <Routes>
             <Route element={<AppWrapper />}>
               <Route element={<Score />} path="/" />
-              {/* <Route element={<div>YO</div>} path="/parametres" /> */}
+              <Route element={<LivingForest />} path="/living-forest" />
             </Route>
           </Routes>
         </BrowserRouter>

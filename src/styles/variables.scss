@@ -17,6 +17,12 @@
   .f-b {
     font-weight: 600;
   }
+  .bc-green {
+    background-color: var(--color-green-400);
+  }
+  .bc-red {
+    background-color: var(--color-red-500);
+  }
 
   // Grey
   --color-grey-100: #fafafa;
