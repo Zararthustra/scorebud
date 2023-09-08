@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.4](https://github.com/Zararthustra/scorebud/compare/v0.0.3...v0.0.4) (2023-09-08)
+
+
+### Features
+
+* **LivingForest:** add win condition counter ([02e8e8c](https://github.com/Zararthustra/scorebud/commit/02e8e8c243e0f8e302d326beb38b5d86ffe3e04d))
+
 ### [0.0.3](https://github.com/Zararthustra/scorebud/compare/v0.0.2...v0.0.3) (2023-09-07)
 
 
