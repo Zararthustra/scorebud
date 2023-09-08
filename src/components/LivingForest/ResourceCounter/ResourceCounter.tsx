@@ -58,7 +58,7 @@ const ResourceCounter = () => {
             <div className="ResourceCounter__tab pt-1 grid grid-cols-2 gap-1">
               <Counter
                 img={plant}
-                alt={'plant'}
+                alt={'plante'}
                 treeScore={treePlantScore}
                 score={cardPlantScore}
                 setScore={setCardPlantScore}
@@ -120,7 +120,7 @@ const ResourceCounter = () => {
             <div className="ResourceCounter__tab pt-1 grid grid-cols-2 gap-1">
               <Counter
                 img={plant}
-                alt={'plant'}
+                alt={'plante'}
                 score={treePlantScore}
                 setScore={setTreePlantScore}
               />

@@ -12,3 +12,4 @@ export { default as Player } from './Player/Player';
 // Living Forest
 export { default as Counter } from './LivingForest/Counter/Counter';
 export { default as ResourceCounter } from './LivingForest/ResourceCounter/ResourceCounter';
+export { default as WinCounter } from './LivingForest/WinCounter/WinCounter';
