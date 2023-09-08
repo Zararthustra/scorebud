@@ -93,11 +93,18 @@ const Sidebar = ({ isOpenSidebar, setIsOpenSidebar }: ISidebarProps) => {
               </div>
 
               {/* Reset */}
-              <IconReset
-                size={30}
-                className="sidebar__icon-logout"
-                onClick={handleReset}
-              />
+              <div className="flex-col align-center">
+                <IconReset
+                  size={30}
+                  className="sidebar__icon-logout"
+                  onClick={handleReset}
+                />
+                <p
+                  className="m-0 mt-1 f-s"
+                  style={{ color: 'var(--color-grey-300)' }}>
+                  {APP_VERSION}
+                </p>
+              </div>
             </div>
           </>
         )}
@@ -155,15 +162,22 @@ const Sidebar = ({ isOpenSidebar, setIsOpenSidebar }: ISidebarProps) => {
               </div>
 
               {/* Reset */}
-              <div className="sidebar__item">
-                <IconReset
-                  size={30}
-                  className="sidebar__icon-logout"
-                  onClick={handleReset}
-                />
-                <div className="sidebar__link" onClick={handleReset}>
-                  Reset
+              <div className="flex-col">
+                <div className="sidebar__item">
+                  <IconReset
+                    size={30}
+                    className="sidebar__icon-logout"
+                    onClick={handleReset}
+                  />
+                  <div className="sidebar__link" onClick={handleReset}>
+                    Reset
+                  </div>
                 </div>
+                <p
+                  className="m-0 f-s self-end mr-1 mt-1"
+                  style={{ color: 'var(--color-grey-300)' }}>
+                  Version {APP_VERSION}
+                </p>
               </div>
             </div>
           </>
