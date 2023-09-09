@@ -3,9 +3,9 @@ import { ConfigProvider, App as AntApp } from 'antd';
 import { useRegisterSW } from 'virtual:pwa-register/react';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 
-import { LivingForest, Score } from '@pages/index';
 import AppWrapper from '@services/AppWrapper';
-import { ModalReloadSW } from '@components/index';
+import { LivingForest, Score } from '@pages/index';
+import { Dice, ModalReloadSW } from '@components/index';
 
 const App = () => {
   const {
@@ -49,6 +49,7 @@ const App = () => {
           <Routes>
             <Route element={<AppWrapper />}>
               <Route element={<Score />} path="/" />
+              <Route element={<Dice />} path="/dice" />
               <Route element={<LivingForest />} path="/living-forest" />
             </Route>
           </Routes>

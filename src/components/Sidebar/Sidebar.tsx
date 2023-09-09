@@ -113,7 +113,9 @@ const Sidebar = ({ isOpenSidebar, setIsOpenSidebar }: ISidebarProps) => {
         {isOpenSidebar && (
           <>
             <div className="flex justify-between mt-1 mr-1">
-              <img src={logo} alt="Logo Scorebud" className="sidebar__logo" />
+              <Link className="sidebar__link" to="/dice">
+                <img src={logo} alt="Logo Scorebud" className="sidebar__logo" />
+              </Link>
 
               <IconSidebarClose
                 size={35}

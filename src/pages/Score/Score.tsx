@@ -1,12 +1,12 @@
 import { useContext, useState } from 'react';
 
 import AppContext, { IAppContext } from '@services/AppContext';
-import { Button, ModalAddPlayers, Player, ScoreTable } from '@components/index';
+import { Button, ModalAddPlayers, ScoreTable } from '@components/index';
 
 import './Score.scss';
 
 const Score = () => {
-  const { players, setPlayers } = useContext<IAppContext>(AppContext);
+  const { players } = useContext<IAppContext>(AppContext);
   const [showAddPlayersModal, setShowAddPlayersModal] =
     useState<boolean>(false);
 
@@ -19,11 +19,7 @@ const Score = () => {
 
       <div className="Score">
         <h1 className=" mt-5 mb-2">Scores</h1>
-        {/* <div className="flex flex-wrap gap-05 my-2 px-1">
-          {players.map((player, index) => (
-            <Player name={player.name} key={index} />
-          ))}
-        </div> */}
+
         {(!!!players || players.length === 0) && (
           <Button
             onClick={() => setShowAddPlayersModal(true)}
@@ -33,6 +29,7 @@ const Score = () => {
             Ajouter des joueurs
           </Button>
         )}
+
         {players.length > 0 && <ScoreTable players={players} />}
       </div>
     </>
