@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.1.1](https://github.com/Zararthustra/scorebud/compare/v0.1.0...v0.1.1) (2023-09-09)
+
+
+### Features
+
+* **Dice:** add roll dice ([5abf048](https://github.com/Zararthustra/scorebud/commit/5abf0488cb9cfaa9115d6e6e4720cfa67bd8cf29))
+* **Version:** add app version ([9290752](https://github.com/Zararthustra/scorebud/commit/92907523c6902275cfd2cd378343cea3eb6e7dd2))
+
 ## [0.1.0](https://github.com/Zararthustra/scorebud/compare/v0.0.4...v0.1.0) (2023-09-08)
 
 ### [0.0.4](https://github.com/Zararthustra/scorebud/compare/v0.0.3...v0.0.4) (2023-09-08)
