@@ -4,11 +4,10 @@ interface ICounterProps {
   img: string;
   alt: string;
   score: number;
-  treeScore?: number;
-  setScore: (value: number) => void;
+  setScore: (value: any) => void;
 }
 
-const Counter = ({ img, alt, treeScore, score, setScore }: ICounterProps) => (
+const Counter = ({ img, alt, score, setScore }: ICounterProps) => (
   <div className="flex-col justify-center align-center gap-05">
     <div className="Counter flex justify-center align-center">
       <p
@@ -27,15 +26,14 @@ const Counter = ({ img, alt, treeScore, score, setScore }: ICounterProps) => (
       <p
         className="Counter__operator"
         onClick={() => {
-          setScore((score += 1));
+          setScore((prev: number) => (prev += 1));
           navigator.vibrate(50);
         }}>
         +
       </p>
     </div>
-    <p className="m-0 Counter__number">
-      {treeScore ? treeScore + score : score}
-    </p>
+
+    <p className="m-0 Counter__number">{score}</p>
   </div>
 );
 

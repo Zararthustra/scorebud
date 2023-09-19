@@ -5,5 +5,24 @@
   }
   &__tab {
     background-color: white;
+
+    button {
+      border-radius: 0 0 3px 3px;
+    }
+  }
+
+  &__total {
+    width: 90%;
+    max-width: 20rem;
+  }
+  &__total-res {
+    background-color: white;
+  }
+  &__total-win {
+    background-color: #fbf2e0;
+
+    img {
+      width: 2rem;
+    }
   }
 }

@@ -5,5 +5,14 @@
   }
   &__tab {
     background-color: #fbf2e0;
+
+    img {
+      width: 2rem;
+      object-fit: contain;
+    }
+
+    button {
+      border-radius: 0 0 3px 3px;
+    }
   }
 }

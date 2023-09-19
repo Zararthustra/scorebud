@@ -3,9 +3,8 @@
   gap: 0.2rem;
 
   img {
-    object-fit: cover;
-    height: 2.5rem;
-    width: 2.5rem;
+    object-fit: contain;
+    height: 2rem;
   }
 
   &__number {
@@ -15,13 +14,13 @@
   }
 
   &__operator {
-    line-height: 18px;
+    line-height: 26px;
     font-weight: 600;
     background-color: var(--color-primary-900);
     color: white;
     font-size: 1rem;
-    height: 1.2rem;
-    width: 1.2rem;
+    height: 1.7rem;
+    width: 1.7rem;
     text-align: center;
     margin: 0;
     cursor: pointer;

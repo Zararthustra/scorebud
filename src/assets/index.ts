@@ -12,6 +12,7 @@ export { default as move } from './img/living_forest/move.png';
 export { default as plant } from './img/living_forest/plant.png';
 export { default as fire } from './img/living_forest/fire.png';
 export { default as lotus } from './img/living_forest/lotus.png';
+export { default as lotusWhite } from './img/living_forest/lotus-white.png';
 export { default as tree } from './img/living_forest/tree.png';
 
 // Icons
