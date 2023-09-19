@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.1.2](https://github.com/Zararthustra/scorebud/compare/v0.1.1...v0.1.2) (2023-09-19)
+
+
+### Features
+
+* **LivingForest:** add total resource ([7a4ee21](https://github.com/Zararthustra/scorebud/commit/7a4ee21c8cabb3bf1f02b94c3de7c2bee4172dbd))
+
 ### [0.1.1](https://github.com/Zararthustra/scorebud/compare/v0.1.0...v0.1.1) (2023-09-09)
 
 
