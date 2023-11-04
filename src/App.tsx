@@ -4,7 +4,7 @@ import { useRegisterSW } from 'virtual:pwa-register/react';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 
 import AppWrapper from '@services/AppWrapper';
-import { LivingForest, Score } from '@pages/index';
+import { LivingForest, Rules, Score } from '@pages/index';
 import { Dice, ModalReloadSW } from '@components/index';
 
 const App = () => {
@@ -50,6 +50,7 @@ const App = () => {
             <Route element={<AppWrapper />}>
               <Route element={<Score />} path="/" />
               <Route element={<Dice />} path="/dice" />
+              <Route element={<Rules />} path="/regles" />
               <Route element={<LivingForest />} path="/living-forest" />
             </Route>
           </Routes>

@@ -7,6 +7,7 @@ import {
   IconTree,
   drop,
   fire,
+  kodama,
   lotus,
   lotusWhite,
   move,
@@ -31,6 +32,9 @@ const ResourceCounter = () => {
   const [treeMoveScore, setTreeMoveScore] = useState<number>(0);
   const [cardMoveScore, setCardMoveScore] = useState<number>(0);
 
+  const [treeKodamaScore, setTreeKodamaScore] = useState<number>(0);
+  const [cardKodamaScore, setCardKodamaScore] = useState<number>(0);
+
   const [treeScore, setTreeScore] = useState<number>(0);
   const [fireScore, setFireScore] = useState<number>(0);
   const [lotusScore, setLotusScore] = useState<number>(0);
@@ -40,12 +44,16 @@ const ResourceCounter = () => {
     !!!cardPlantScore &&
     !!!cardSunScore &&
     !!!cardDropScore &&
+    !!!lotusScore &&
+    !!!cardKodamaScore &&
     !!!cardMoveScore;
   const resetTreesDisabled =
     !!!treePlantScore &&
     !!!treeSunScore &&
     !!!treeDropScore &&
     !!!treeMoveScore &&
+    !!!lotusTreeScore &&
+    !!!treeKodamaScore &&
     !!!lotusTreeScore;
 
   return (
@@ -95,6 +103,20 @@ const ResourceCounter = () => {
                   setScore={setCardMoveScore}
                 />
 
+                <Counter
+                  score={lotusScore}
+                  setScore={setLotusScore}
+                  img={lotusWhite}
+                  alt="lotus"
+                />
+
+                <Counter
+                  score={cardKodamaScore}
+                  setScore={setCardKodamaScore}
+                  img={kodama}
+                  alt="kodama"
+                />
+
                 <Button
                   primary
                   className={
@@ -105,6 +127,8 @@ const ResourceCounter = () => {
                     setCardSunScore(0);
                     setCardDropScore(0);
                     setCardMoveScore(0);
+                    setCardKodamaScore(0);
+                    setLotusScore(0);
                     navigator.vibrate([50, 50, 50]);
                   }}
                   disabled={resetCardsDisabled}>
@@ -160,6 +184,13 @@ const ResourceCounter = () => {
                   alt="lotus"
                 />
 
+                <Counter
+                  score={treeKodamaScore}
+                  setScore={setTreeKodamaScore}
+                  img={kodama}
+                  alt="kodama"
+                />
+
                 <Button
                   primary
                   className={
@@ -171,6 +202,7 @@ const ResourceCounter = () => {
                     setTreeDropScore(0);
                     setTreeMoveScore(0);
                     setLotusTreeScore(0);
+                    setTreeKodamaScore(0);
                     navigator.vibrate([50, 50, 50]);
                   }}
                   disabled={resetTreesDisabled}>
@@ -184,6 +216,7 @@ const ResourceCounter = () => {
       />
 
       <div className="ResourceCounter__total">
+        <h3>Totaux</h3>
         {/* Resources */}
         <div className="ResourceCounter__total-res flex justify-evenly py-1">
           <ResourceTotal
@@ -206,6 +239,11 @@ const ResourceCounter = () => {
             img={move}
             alt="déplacement"
           />
+          <ResourceTotal
+            score={cardKodamaScore + treeKodamaScore}
+            img={kodama}
+            alt="kodama"
+          />
         </div>
 
         {/* Win conditions */}
@@ -223,7 +261,8 @@ const ResourceCounter = () => {
             alt="feu"
           />
           <Counter
-            score={lotusScore + lotusTreeScore}
+            score={lotusScore}
+            scoreToAppend={lotusTreeScore}
             setScore={setLotusScore}
             img={lotus}
             alt="lotus"

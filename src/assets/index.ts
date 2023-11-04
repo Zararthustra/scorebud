@@ -14,6 +14,7 @@ export { default as fire } from './img/living_forest/fire.png';
 export { default as lotus } from './img/living_forest/lotus.png';
 export { default as lotusWhite } from './img/living_forest/lotus-white.png';
 export { default as tree } from './img/living_forest/tree.png';
+export { default as kodama } from './img/living_forest/kodama.png';
 
 // Icons
 export { default as IconTemplate } from './svg/IconTemplate';
@@ -44,3 +45,4 @@ export { default as IconReset } from './svg/IconReset';
 export { default as IconForest } from './svg/IconForest';
 export { default as IconTree } from './svg/IconTree';
 export { default as IconCards } from './svg/IconCards';
+export { default as IconRule } from './svg/IconRule';

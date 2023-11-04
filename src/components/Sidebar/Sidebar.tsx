@@ -5,6 +5,7 @@ import { Link, useLocation, useNavigate } from 'react-router-dom';
 import {
   IconForest,
   IconReset,
+  IconRule,
   IconSidebarClose,
   IconSidebarOpen,
   IconTable,
@@ -90,6 +91,19 @@ const Sidebar = ({ isOpenSidebar, setIsOpenSidebar }: ISidebarProps) => {
                     onClick={() => navigate('/living-forest')}
                   />
                 </div>
+
+                {/* Rules */}
+                <div
+                  className={
+                    location.pathname === '/regles' ? 'active-item' : ''
+                  }>
+                  <IconRule
+                    width={40}
+                    height={35}
+                    className="sidebar__icon-item"
+                    onClick={() => navigate('/regles')}
+                  />
+                </div>
               </div>
 
               {/* Reset */}
@@ -159,6 +173,24 @@ const Sidebar = ({ isOpenSidebar, setIsOpenSidebar }: ISidebarProps) => {
                   </div>
                   <Link className="sidebar__link" to="/living-forest">
                     Living Forest
+                  </Link>
+                </div>
+
+                {/* Rules */}
+                <div className="sidebar__item">
+                  <div
+                    className={
+                      location.pathname === '/regles' ? 'active-item' : ''
+                    }>
+                    <IconRule
+                      width={40}
+                      height={35}
+                      className="sidebar__icon-item"
+                      onClick={() => navigate('/regles')}
+                    />
+                  </div>
+                  <Link className="sidebar__link" to="/regles">
+                    Règles
                   </Link>
                 </div>
               </div>

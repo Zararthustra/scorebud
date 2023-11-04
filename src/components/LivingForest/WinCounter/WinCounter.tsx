@@ -69,7 +69,9 @@ const WinCounter = () => {
               }}
               disabled={!!!treeScore && !!!fireScore && !!!lotusScore}>
               <p className="m-0">
-                Ajouter le score manche {players[activeKey].scores.length + 1}
+                Ajouter <strong>{treeScore + fireScore + lotusScore}</strong>{' '}
+                pour la manche{' '}
+                <strong>{players[activeKey].scores.length + 1}</strong>
               </p>
             </Button>
           </div>
