@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.1.3](https://github.com/Zararthustra/scorebud/compare/v0.1.2...v0.1.3) (2023-11-04)
+
+
+### Features
+
+* **LivingForest:** add Kodama extension ([495a693](https://github.com/Zararthustra/scorebud/commit/495a69300f4c926a4bffbabda8bae1559fed4155))
+
 ### [0.1.2](https://github.com/Zararthustra/scorebud/compare/v0.1.1...v0.1.2) (2023-09-19)
 
 
