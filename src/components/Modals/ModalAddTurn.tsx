@@ -31,7 +31,7 @@ const ModalAddTurn = ({ showModal, setShowModal }: IModalAddTurnProps) => {
     let updatedPlayers: IPlayer[] = Object.assign([], players);
 
     for (let i = 0; i < updatedPlayers.length; i++) {
-      updatedPlayers[i].scores.push(newScores[i]);
+      updatedPlayers[i].scores.push(newScores[i] || 0);
     }
 
     setPlayers(updatedPlayers);

@@ -1,16 +1,14 @@
-import { useContext, useEffect } from 'react';
+import { useEffect } from 'react';
 import { useMediaQuery } from 'react-responsive';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 
 import {
-  IconForest,
   IconReset,
-  IconRule,
   IconSidebarClose,
   IconSidebarOpen,
-  IconTable,
   logo
 } from '@assets/index';
+import { sidebar } from '@data/sidebar';
 import { clearLS } from '@services/localStorageService';
 
 import './Sidebar.scss';
@@ -70,40 +68,21 @@ const Sidebar = ({ isOpenSidebar, setIsOpenSidebar }: ISidebarProps) => {
               className="flex-col justify-between align-center mt-2"
               style={{ height: '100%' }}>
               <div className="flex-col gap-1 align-center">
-                {/* Score */}
-                <div className={location.pathname === '/' ? 'active-item' : ''}>
-                  <IconTable
-                    size={40}
-                    className="sidebar__icon-item"
-                    onClick={() => navigate('/')}
-                  />
-                </div>
-
-                {/* LivingForest */}
-                <div
-                  className={
-                    location.pathname === '/living-forest' ? 'active-item' : ''
-                  }>
-                  <IconForest
-                    width={40}
-                    height={35}
-                    className="sidebar__icon-item"
-                    onClick={() => navigate('/living-forest')}
-                  />
-                </div>
-
-                {/* Rules */}
-                <div
-                  className={
-                    location.pathname === '/regles' ? 'active-item' : ''
-                  }>
-                  <IconRule
-                    width={40}
-                    height={35}
-                    className="sidebar__icon-item"
-                    onClick={() => navigate('/regles')}
-                  />
-                </div>
+                {sidebar.map((item, index) => (
+                  <div
+                    key={index}
+                    className={
+                      location.pathname === item.link ? 'active-item' : ''
+                    }>
+                    <item.icon
+                      width={40}
+                      height={35}
+                      size={40}
+                      className="sidebar__icon-item"
+                      onClick={() => navigate(item.link)}
+                    />
+                  </div>
+                ))}
               </div>
 
               {/* Reset */}
@@ -141,58 +120,25 @@ const Sidebar = ({ isOpenSidebar, setIsOpenSidebar }: ISidebarProps) => {
               className="flex-col justify-between mt-2"
               style={{ height: '100%' }}>
               <div className="flex-col gap-1">
-                {/* Score */}
-                <div className="sidebar__item">
-                  <div
-                    className={location.pathname === '/' ? 'active-item' : ''}>
-                    <IconTable
-                      size={40}
-                      className="sidebar__icon-item"
-                      onClick={() => navigate('/')}
-                    />
+                {sidebar.map((item, index) => (
+                  <div key={index} className="sidebar__item">
+                    <div
+                      className={
+                        location.pathname === item.link ? 'active-item' : ''
+                      }>
+                      <item.icon
+                        size={40}
+                        width={40}
+                        height={35}
+                        className="sidebar__icon-item"
+                        onClick={() => navigate(item.link)}
+                      />
+                    </div>
+                    <Link className="sidebar__link" to={item.link}>
+                      {item.name}
+                    </Link>
                   </div>
-                  <Link className="sidebar__link" to="/">
-                    Scores
-                  </Link>
-                </div>
-
-                {/* LivingForest */}
-                <div className="sidebar__item">
-                  <div
-                    className={
-                      location.pathname === '/living-forest'
-                        ? 'active-item'
-                        : ''
-                    }>
-                    <IconForest
-                      width={40}
-                      height={35}
-                      className="sidebar__icon-item"
-                      onClick={() => navigate('/living-forest')}
-                    />
-                  </div>
-                  <Link className="sidebar__link" to="/living-forest">
-                    Living Forest
-                  </Link>
-                </div>
-
-                {/* Rules */}
-                <div className="sidebar__item">
-                  <div
-                    className={
-                      location.pathname === '/regles' ? 'active-item' : ''
-                    }>
-                    <IconRule
-                      width={40}
-                      height={35}
-                      className="sidebar__icon-item"
-                      onClick={() => navigate('/regles')}
-                    />
-                  </div>
-                  <Link className="sidebar__link" to="/regles">
-                    Règles
-                  </Link>
-                </div>
+                ))}
               </div>
 
               {/* Reset */}

@@ -23,7 +23,8 @@
       "@interfaces/*": ["./src/interfaces/*"],
       "@mocks/*": ["./src/mocks/*"],
       "@utils/*": ["./src/utils/*"],
-      "@queries/*": ["./src/queries/*"]
+      "@queries/*": ["./src/queries/*"],
+      "@data/*": ["./src/data/*"]
     }
   },
   "include": ["src", "vite-env.d.ts", "node_modules/vite-plugin-pwa/client.d.ts"],

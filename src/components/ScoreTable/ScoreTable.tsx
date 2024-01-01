@@ -12,6 +12,18 @@ interface IScoreTable {
 const ScoreTable = ({ players }: IScoreTable) => {
   const [showModalAddTurn, setShowModalAddTurn] = useState<boolean>(false);
 
+  const bestPlayerTurn = (turn: number) => {
+    const turnScores = players.map((player) => player.scores[turn]);
+    const bestScore = Math.max(...turnScores);
+    const bestPlayers = players.filter(
+      (player) => player.scores[turn] === bestScore
+    );
+    if (bestPlayers.length === players.length || bestPlayers.length === 0)
+      return null;
+
+    return bestPlayers.map((player) => player.name);
+  };
+
   return (
     <>
       <ModalAddTurn
@@ -41,7 +53,14 @@ const ScoreTable = ({ players }: IScoreTable) => {
                   <td className="ScoreTable__turn-column">{turnIndex + 1}</td>
                   {players.map((player, index) => (
                     <td key={index} className="ScoreTable__column">
-                      {player.scores[turnIndex]}
+                      <p
+                        className={
+                          bestPlayerTurn(turnIndex)?.includes(player.name)
+                            ? 'ScoreTable__best-player'
+                            : 'm-0'
+                        }>
+                        {player.scores[turnIndex]}
+                      </p>
                     </td>
                   ))}
                 </tr>

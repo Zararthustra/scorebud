@@ -1,5 +1,5 @@
 import { Modal } from 'antd';
-import { useContext, useState } from 'react';
+import { useContext, useEffect, useRef, useState } from 'react';
 
 import { Button, Player } from '@components/index';
 import { setLS } from '@services/localStorageService';
@@ -17,8 +17,13 @@ const ModalAddPlayers = ({
   showModal,
   setShowModal
 }: IModalAddPlayersProps) => {
+  const input = useRef<HTMLInputElement>(null);
   const [player, setPlayer] = useState<string>('');
   const { players, setPlayers } = useContext<IAppContext>(AppContext);
+
+  useEffect(() => {
+    if (showModal) input.current?.focus();
+  }, [showModal]);
 
   const addPlayer = (e: React.FormEvent) => {
     e.preventDefault();
@@ -78,6 +83,7 @@ const ModalAddPlayers = ({
           onSubmit={addPlayer}
           className="ModalAddPlayers__form mb-2 flex w-80 gap-05">
           <input
+            ref={input}
             className="w-100"
             type="text"
             placeholder="Nom du joueur"
