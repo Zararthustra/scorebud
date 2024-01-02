@@ -46,3 +46,8 @@ export { default as IconForest } from './svg/IconForest';
 export { default as IconTree } from './svg/IconTree';
 export { default as IconCards } from './svg/IconCards';
 export { default as IconRule } from './svg/IconRule';
+export { default as IconContree } from './svg/IconContree';
+export { default as IconHeart } from './svg/IconHeart';
+export { default as IconSpade } from './svg/IconSpade';
+export { default as IconClub } from './svg/IconClub';
+export { default as IconDiamond } from './svg/IconDiamond';

@@ -4,7 +4,7 @@ import { useRegisterSW } from 'virtual:pwa-register/react';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 
 import AppWrapper from '@services/AppWrapper';
-import { LivingForest, Rules, Score } from '@pages/index';
+import { Contree, LivingForest, Rules, Score } from '@pages/index';
 import { Dice, ModalReloadSW } from '@components/index';
 
 const App = () => {
@@ -52,6 +52,7 @@ const App = () => {
               <Route element={<Dice />} path="/dice" />
               <Route element={<Rules />} path="/regles" />
               <Route element={<LivingForest />} path="/living-forest" />
+              <Route element={<Contree />} path="/belote-contree" />
             </Route>
           </Routes>
         </BrowserRouter>
