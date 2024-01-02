@@ -1,6 +1,6 @@
 import { Switch } from 'antd';
 import { useFormik } from 'formik';
-import { object, string } from 'yup';
+import { boolean, object, string } from 'yup';
 import { useContext, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
@@ -22,12 +22,16 @@ interface IContree {
   bid: string;
   trump: 'diamond' | 'spade' | 'heart' | 'club' | '';
   contract: string;
+  contre: boolean;
+  rebelote: boolean;
+  rebeloteTeam: string;
 }
 
 const Contree = () => {
   const navigate = useNavigate();
   const { players } = useContext<IAppContext>(AppContext);
   const [contre, setContre] = useState<boolean>(false);
+  const [rebelote, setRebelote] = useState<boolean>(false);
   const [showAddPlayersModal, setShowAddPlayersModal] =
     useState<boolean>(false);
   const trumps = [
@@ -73,13 +77,19 @@ const Contree = () => {
     initialValues: {
       bid: '',
       trump: '',
-      contract: ''
+      contract: '',
+      contre: false,
+      rebelote: false,
+      rebeloteTeam: ''
     },
     onSubmit: onSubmitHandler,
     validationSchema: object({
       bid: string().required("Sélectionnez l'équipe qui a enchéri"),
       trump: string().required("Sélectionnez l'atout"),
-      contract: string().required('Sélectionnez la valeur du contrat')
+      contract: string().required('Sélectionnez la valeur du contrat'),
+      contre: boolean(),
+      rebelote: boolean(),
+      rebeloteTeam: string().required("Sélectionnez l'équipe")
     })
   });
 
@@ -99,9 +109,12 @@ const Contree = () => {
           <div className="flex align-center gap-1 tag--red">
             <IconError />
             <p className="m-0">
-              Le tableau des scores doit comprendre
-              <strong> exactement 2 colonnes </strong>
-              correspondantes aux 2 équipes.
+              Vous devez avoir
+              <strong> exactement 2 équipes </strong>et vous avez actuellement{' '}
+              <strong>
+                {players.length + (players.length > 1 ? ' équipes' : ' équipe')}
+              </strong>
+              .
             </p>
           </div>
           {players.length === 0 ? (
@@ -136,90 +149,124 @@ const Contree = () => {
           <div className="w-100">
             <div className="flex align-center justify-between gap-1">
               <h2>Enchères</h2>
-              {errors.bid && <p className="m-0 tag tag--red">{errors.bid}</p>}
+              <div className="flex toggle-buttons">
+                {players.map((team, index) => (
+                  <div
+                    onClick={() => {
+                      setFieldValue('bid', team.name);
+                      navigator.vibrate(50);
+                    }}
+                    key={index}
+                    className={
+                      'toggle-button ' +
+                      (values.bid === team.name
+                        ? 'toggle-button--selected'
+                        : '')
+                    }>
+                    {team.name}
+                  </div>
+                ))}
+              </div>
             </div>
-            <div className="flex toggle-buttons">
-              {players.map((team, index) => (
-                <div
-                  onClick={() => {
-                    setFieldValue('bid', team.name);
-                    navigator.vibrate(50);
-                  }}
-                  key={index}
-                  className={
-                    'toggle-button ' +
-                    (values.bid === team.name ? 'toggle-button--selected' : '')
-                  }>
-                  {team.name}
-                </div>
-              ))}
-            </div>
+            {errors.bid && <p className="m-0 tag tag--red">{errors.bid}</p>}
           </div>
 
           {/* Trump */}
           <div className="w-100">
             <div className="flex align-center justify-between gap-1">
               <h2>Atout</h2>
-              {errors.trump && (
-                <p className="m-0 tag tag--red">{errors.trump}</p>
-              )}
+              <div className="flex toggle-buttons">
+                {trumps.map((trump, index) => (
+                  <div
+                    key={index}
+                    onClick={() => {
+                      setFieldValue('trump', trump.name);
+                      navigator.vibrate(50);
+                    }}
+                    className={
+                      'toggle-button flex align-center ' +
+                      (values.trump === trump.name
+                        ? 'toggle-button--selected'
+                        : '')
+                    }>
+                    <trump.icon width={16} height={16} />
+                  </div>
+                ))}
+              </div>
             </div>
-            <div className="flex toggle-buttons">
-              {trumps.map((trump, index) => (
-                <div
-                  key={index}
-                  onClick={() => {
-                    setFieldValue('trump', trump.name);
-                    navigator.vibrate(50);
-                  }}
-                  className={
-                    'toggle-button flex align-center ' +
-                    (values.trump === trump.name
-                      ? 'toggle-button--selected'
-                      : '')
-                  }>
-                  <trump.icon width={20} height={20} />
-                </div>
-              ))}
-            </div>
+            {errors.trump && <p className="m-0 tag tag--red">{errors.trump}</p>}
           </div>
 
           {/* Contract */}
           <div className="w-100">
             <div className="flex align-center justify-between gap-1">
               <h2>Contrat</h2>
-              {errors.contract && (
-                <p className="m-0 tag tag--red">{errors.contract}</p>
-              )}
+              <select
+                className="select"
+                onChange={(e) => {
+                  setFieldValue('contract', e.target.value);
+                  navigator.vibrate(50);
+                }}>
+                <option value="">Sélectionnez une valeur</option>
+                {contracts.map((amount, index) => (
+                  <option key={index} value={amount}>
+                    {amount}
+                  </option>
+                ))}
+              </select>
             </div>
-            <select
-              className="select"
-              onChange={(e) => {
-                setFieldValue('contract', e.target.value);
-                navigator.vibrate(50);
-              }}>
-              <option value="">Sélectionnez une valeur</option>
-              {contracts.map((amount, index) => (
-                <option key={index} value={amount}>
-                  {amount}
-                </option>
-              ))}
-            </select>
+            {errors.contract && (
+              <p className="m-0 tag tag--red">{errors.contract}</p>
+            )}
+          </div>
+
+          {/* Rebelote */}
+          <div className="w-100 flex-col">
+            <div className="flex align-center justify-between gap-1 w-100">
+              <h2>Belote/Rebelote</h2>
+              <Switch
+                onChange={() => {
+                  setFieldValue('rebelote', !rebelote);
+                  setRebelote(!rebelote);
+                  navigator.vibrate(50);
+                }}
+              />
+            </div>
+            {rebelote && errors.rebeloteTeam && (
+              <p className="mb-05 tag tag--red">{errors.rebeloteTeam}</p>
+            )}
+            {rebelote && (
+              <div className="flex self-ends toggle-buttons">
+                {players.map((team, index) => (
+                  <div
+                    onClick={() => {
+                      setFieldValue('rebeloteTeam', team.name);
+                      navigator.vibrate(50);
+                    }}
+                    key={index}
+                    className={
+                      'toggle-button ' +
+                      (values.rebeloteTeam === team.name
+                        ? 'toggle-button--selected'
+                        : '')
+                    }>
+                    {team.name}
+                  </div>
+                ))}
+              </div>
+            )}
           </div>
 
           {/* Contré */}
-          <div className="w-100">
-            <div className="flex align-center justify-between gap-1">
-              <h2>Contré ?</h2>
-              {errors.contract && (
-                <p className="m-0 tag tag--red">{errors.contract}</p>
-              )}
-            </div>
-            Switch here
-            {/* <Switch onChange={() => {
-                setFieldValue('contre', contre);
+          <div className="flex align-center justify-between gap-1 w-100">
+            <h2>Contré</h2>
+            <Switch
+              onChange={() => {
+                setFieldValue('contre', !contre);
+                setContre(!contre);
                 navigator.vibrate(50);
-            })} /> */}
+              }}
+            />
           </div>
 
           <Button

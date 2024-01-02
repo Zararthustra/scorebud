@@ -13,11 +13,11 @@ const App = () => {
     needRefresh: [needRefresh, setNeedRefresh],
     updateServiceWorker
   } = useRegisterSW({
-    onRegistered(r) {
+    onRegistered(r: any) {
       // eslint-disable-next-line prefer-template
       console.log('SW Registered');
     },
-    onRegisterError(error) {
+    onRegisterError(error: any) {
       console.log('SW registration error', error);
     }
   });
