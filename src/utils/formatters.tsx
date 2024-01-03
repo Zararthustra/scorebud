@@ -125,3 +125,19 @@ export const messageObject = (
     content: content
   };
 };
+
+export const tradTrump = (trump: string) => {
+  switch (trump) {
+    case 'heart':
+      return 'coeur';
+    case 'spade':
+      return 'pique';
+    case 'club':
+      return 'trèfle';
+    case 'diamond':
+      return 'carreau';
+
+    default:
+      break;
+  }
+};

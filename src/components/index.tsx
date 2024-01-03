@@ -15,3 +15,8 @@ export { default as Counter } from './LivingForest/Counter/Counter';
 export { default as ResourceCounter } from './LivingForest/ResourceCounter/ResourceCounter';
 export { default as ResourceTotal } from './LivingForest/ResourceCounter/ResourceTotal';
 export { default as WinCounter } from './LivingForest/WinCounter/WinCounter';
+
+// La Belote Contrée
+export { default as Card } from './Contree/Card/Card';
+export { default as Setup } from './Contree/Setup/Setup';
+export { default as ContreeCounter } from './Contree/Counter/Counter';

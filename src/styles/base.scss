@@ -163,3 +163,10 @@ h3 {
     padding: 0rem 0.7rem;
   }
 }
+
+// Antd
+.ant-message-custom-content {
+  display: flex;
+  justify-items: center;
+  gap: 0.5rem;
+}

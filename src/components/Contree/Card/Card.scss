@@ -1,0 +1,32 @@
+.Card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: white;
+  height: 4rem;
+  width: 2.5rem;
+  border-radius: var(--rounded-s);
+  box-shadow: var(--shadow);
+  cursor: pointer;
+  position: relative;
+  user-select: none;
+
+  &--disabled {
+    background-color: var(--color-grey-300);
+    color: var(--color-grey-100);
+    cursor: not-allowed;
+  }
+
+  p {
+    margin: 0;
+    font-size: 1.4rem;
+    font-weight: 600;
+  }
+
+  &__trump {
+    position: absolute;
+    top: 0.1rem;
+    left: 0.2rem;
+  }
+}

@@ -1,10 +1,10 @@
-import { Modal } from 'antd';
+import { Modal, App } from 'antd';
 import { useContext, useEffect, useRef, useState } from 'react';
 
 import { Button, Player } from '@components/index';
 import { setLS } from '@services/localStorageService';
-import { capitalizeFirstLetter } from '@utils/formatters';
 import AppContext, { IAppContext } from '@services/AppContext';
+import { capitalizeFirstLetter, messageObject } from '@utils/formatters';
 
 import './Modal.scss';
 
@@ -17,6 +17,7 @@ const ModalAddPlayers = ({
   showModal,
   setShowModal
 }: IModalAddPlayersProps) => {
+  const { message } = App.useApp();
   const input = useRef<HTMLInputElement>(null);
   const [player, setPlayer] = useState<string>('');
   const { players, setPlayers } = useContext<IAppContext>(AppContext);
@@ -27,6 +28,16 @@ const ModalAddPlayers = ({
 
   const addPlayer = (e: React.FormEvent) => {
     e.preventDefault();
+    const playerExist = players.some(
+      (playerObj) => playerObj.name === capitalizeFirstLetter(player)
+    );
+    if (playerExist) {
+      setPlayer('');
+      message.error(
+        messageObject('error', `Déjà pris ! Choisissez un autre nom.`)
+      );
+      return;
+    }
 
     const playerObject = {
       name: capitalizeFirstLetter(player),
@@ -85,6 +96,8 @@ const ModalAddPlayers = ({
           <input
             ref={input}
             className="w-100"
+            id="name"
+            autoComplete="name"
             type="text"
             placeholder="Nom du joueur"
             maxLength={15}
