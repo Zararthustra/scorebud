@@ -1,7 +1,7 @@
 import { Switch } from 'antd';
 import { useFormik } from 'formik';
-import { boolean, object, string } from 'yup';
 import { useContext, useState } from 'react';
+import { boolean, object, string } from 'yup';
 import { useNavigate } from 'react-router-dom';
 
 import {
@@ -12,8 +12,8 @@ import {
   IconReset,
   IconSpade
 } from '@assets/index';
-import { clearLS } from '@services/localStorageService';
 import { Button, ModalAddPlayers } from '@components/index';
+import { clearLS, setLS } from '@services/localStorageService';
 import AppContext, { IAppContext } from '@services/AppContext';
 
 import './Contree.scss';
@@ -25,6 +25,7 @@ interface IContree {
   contre: boolean;
   rebelote: boolean;
   rebeloteTeam: string;
+  lastPli: string;
 }
 
 const Contree = () => {
@@ -70,7 +71,7 @@ const Contree = () => {
     navigate(0);
   };
   const onSubmitHandler = async (values: IContree) => {
-    console.log(values);
+    setLS('contree', JSON.stringify(values));
   };
 
   const { values, errors, handleSubmit, setFieldValue } = useFormik({
@@ -80,7 +81,8 @@ const Contree = () => {
       contract: '',
       contre: false,
       rebelote: false,
-      rebeloteTeam: ''
+      rebeloteTeam: '',
+      lastPli: ''
     },
     onSubmit: onSubmitHandler,
     validationSchema: object({
@@ -89,12 +91,15 @@ const Contree = () => {
       contract: string().required('Sélectionnez la valeur du contrat'),
       contre: boolean(),
       rebelote: boolean(),
-      rebeloteTeam: string().required("Sélectionnez l'équipe")
+      rebeloteTeam: string().when('rebelote', {
+        is: true,
+        then: (schema) => schema.required("Sélectionnez l'équipe")
+      }),
+      lastPli: string().required(
+        "Sélectionnez l'équipe qui remporte le dernier pli"
+      )
     })
   });
-
-  console.log('errors =>', errors);
-  console.log('values =>', values);
 
   if (players.length !== 2)
     return (
@@ -202,6 +207,7 @@ const Contree = () => {
             <div className="flex align-center justify-between gap-1">
               <h2>Contrat</h2>
               <select
+                id="contract"
                 className="select"
                 onChange={(e) => {
                   setFieldValue('contract', e.target.value);
@@ -267,6 +273,34 @@ const Contree = () => {
                 navigator.vibrate(50);
               }}
             />
+          </div>
+
+          {/* Last pli */}
+          <div className="w-100">
+            <div className="flex align-center justify-between gap-1">
+              <h2>Dernier pli</h2>
+              <div className="flex toggle-buttons">
+                {players.map((team, index) => (
+                  <div
+                    onClick={() => {
+                      setFieldValue('lastPli', team.name);
+                      navigator.vibrate(50);
+                    }}
+                    key={index}
+                    className={
+                      'toggle-button ' +
+                      (values.lastPli === team.name
+                        ? 'toggle-button--selected'
+                        : '')
+                    }>
+                    {team.name}
+                  </div>
+                ))}
+              </div>
+            </div>
+            {errors.lastPli && (
+              <p className="m-0 tag tag--red">{errors.lastPli}</p>
+            )}
           </div>
 
           <Button
