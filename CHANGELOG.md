@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.1.4](https://github.com/Zararthustra/scorebud/compare/v0.1.3...v0.1.4) (2024-01-04)
+
+
+### Features
+
+* **Contree:** [WIP] add Belote Contree game ([c5d74d5](https://github.com/Zararthustra/scorebud/commit/c5d74d5e270a41e6837478208ba567831d6bece3))
+* **Contree:** add contre & rebelote ([38ff0a7](https://github.com/Zararthustra/scorebud/commit/38ff0a778a2d85318a40e0763bd6e21ca196170c))
+* **Contree:** add surcontre + handle final score logic ([8e3bbae](https://github.com/Zararthustra/scorebud/commit/8e3bbae3c8d37dd5c172aefdde5a43d130a74f51))
+* **Contree:** finalize counter form ([f008cc7](https://github.com/Zararthustra/scorebud/commit/f008cc79eeb9ce9c16bb13b9922ea9dcfb6ebfc8))
+* **Contree:** refactoring + add counter view ([05ead41](https://github.com/Zararthustra/scorebud/commit/05ead41f499d5aad48233b2ac3bd5d2dec9682f5))
+* **Score, Rules, Sidebar, ModalAddTurn, ModalAddNewPlayer:** add tag on the best player of the turn, refactor sidebar & rules to add new items easily, fix NaN error on new turn with no value, add autofocus on ModalAddNewPlayer ([2ad1b83](https://github.com/Zararthustra/scorebud/commit/2ad1b83b57684fb1814e7714cc8449c5cc10f7ff))
+
 ### [0.1.3](https://github.com/Zararthustra/scorebud/compare/v0.1.2...v0.1.3) (2023-11-04)
 
 
