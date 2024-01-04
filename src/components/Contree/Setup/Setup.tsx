@@ -27,6 +27,7 @@ const Setup = ({ setSetup }: ISetupProps) => {
   const navigate = useNavigate();
   const { players } = useContext<IAppContext>(AppContext);
   const [contre, setContre] = useState<boolean>(false);
+  const [surcontre, setSurcontre] = useState<boolean>(false);
   const [rebelote, setRebelote] = useState<boolean>(false);
   const [showAddPlayersModal, setShowAddPlayersModal] =
     useState<boolean>(false);
@@ -76,6 +77,7 @@ const Setup = ({ setSetup }: ISetupProps) => {
       trump: '',
       contract: '',
       contre: false,
+      surcontre: false,
       rebelote: false,
       rebeloteTeam: '',
       lastPli: ''
@@ -86,6 +88,7 @@ const Setup = ({ setSetup }: ISetupProps) => {
       trump: string().required("Sélectionnez l'atout"),
       contract: string().required('Sélectionnez la valeur du contrat'),
       contre: boolean(),
+      surcontre: boolean(),
       rebelote: boolean(),
       rebeloteTeam: string().when('rebelote', {
         is: true,
@@ -269,10 +272,24 @@ const Setup = ({ setSetup }: ISetupProps) => {
             />
           </div>
 
+          {/* Surcontré */}
+          {contre && (
+            <div className="flex align-center justify-between gap-1 w-100">
+              <h2>Surcontré</h2>
+              <Switch
+                onChange={() => {
+                  setFieldValue('surcontre', !surcontre);
+                  setSurcontre(!surcontre);
+                  navigator.vibrate(50);
+                }}
+              />
+            </div>
+          )}
+
           {/* Last pli */}
           <div className="w-100">
             <div className="flex align-center justify-between gap-1">
-              <h2>Dernier pli</h2>
+              <h2>Dix de der</h2>
               <div className="flex toggle-buttons">
                 {players.map((team, index) => (
                   <div

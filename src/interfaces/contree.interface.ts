@@ -5,6 +5,7 @@ interface ISetupContree {
   trump: 'diamond' | 'spade' | 'heart' | 'club' | '';
   contract: string;
   contre: boolean;
+  surcontre: boolean;
   rebelote: boolean;
   rebeloteTeam: string;
   lastPli: string;
