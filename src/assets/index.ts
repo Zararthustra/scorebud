@@ -5,6 +5,7 @@ export { default as customer3 } from './img/customer3.png';
 export { default as notfound } from './img/notfound.gif';
 export { default as blank_profile } from './img/blank_profile.png';
 export { default as logo } from './img/logo.png';
+export { default as contreePoints } from './img/contree.jpg';
 // Living Forest
 export { default as sun } from './img/living_forest/sun.png';
 export { default as drop } from './img/living_forest/drop.png';

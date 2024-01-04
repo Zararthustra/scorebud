@@ -2,7 +2,7 @@ import { Switch } from 'antd';
 import { useNavigate } from 'react-router-dom';
 import { useContext, useEffect, useState } from 'react';
 
-import { IconReset } from '@assets/index';
+import { IconClose, IconReset } from '@assets/index';
 import { addScore } from '@utils/computers';
 import { tradTrump } from '@utils/formatters';
 import { Button, Card } from '@components/index';
@@ -154,6 +154,35 @@ const Counter = ({ setSetup, setup }: ICounterProps) => {
 
   return (
     <div className="Counter">
+      <IconClose
+        className="self-start"
+        style={{ color: 'var(--color-primary-500)', cursor: 'pointer' }}
+        onClick={() => {
+          setSetup('');
+          setLS('contree', '');
+        }}
+      />
+
+      {/* Score */}
+      <div
+        className="flex align-end gap-05 my-1"
+        style={{ position: 'relative' }}>
+        <p className="Counter__counter">{score}</p>
+        {!capot && (
+          <div
+            className="Counter__contract"
+            style={
+              setup.bid === calculateTeam && score >= objective
+                ? { color: 'var(--color-green-500)' }
+                : setup.bid !== calculateTeam && score > objective
+                ? { color: 'var(--color-green-500)' }
+                : {}
+            }>
+            /{objective}
+          </div>
+        )}
+      </div>
+
       {/* Infos */}
       <div className="flex flex-wrap justify-evenly tag--info p-05 gap-05">
         <div className="flex gap-05">
@@ -192,26 +221,6 @@ const Counter = ({ setSetup, setup }: ICounterProps) => {
           <div className="flex gap-05">
             <p className="Counter__setup">Surcontré:</p>
             <p className="Counter__setup">{setup.surcontre ? 'oui' : 'non'}</p>
-          </div>
-        )}
-      </div>
-
-      {/* Score */}
-      <div
-        className="flex align-end gap-05 my-1"
-        style={{ position: 'relative' }}>
-        <p className="Counter__counter">{score}</p>
-        {!capot && (
-          <div
-            className="Counter__contract"
-            style={
-              setup.bid === calculateTeam && score >= objective
-                ? { color: 'var(--color-green-500)' }
-                : setup.bid !== calculateTeam && score > objective
-                ? { color: 'var(--color-green-500)' }
-                : {}
-            }>
-            /{objective}
           </div>
         )}
       </div>
@@ -261,23 +270,25 @@ const Counter = ({ setSetup, setup }: ICounterProps) => {
       {/* Buttons */}
       <div className="flex-col gap-05 mt-2 w-100">
         <div className="flex gap-05">
-          {!capot && (
+          {!capot && !capotOK && (
             <Button
               className="w-100"
+              style={{ fontSize: '0.75rem', lineHeight: '12px' }}
               onClick={() => {
                 setPoints(points.slice(0, -1));
               }}>
-              <IconReset />
+              <IconReset size={15} />
               Annuler dernier
             </Button>
           )}
           {!capot && (
             <Button
               className="w-100"
+              style={{ fontSize: '0.75rem', lineHeight: '12px' }}
               onClick={() => {
                 navigate(0);
               }}>
-              <IconReset />
+              <IconReset size={15} />
               Recommencer calcul
             </Button>
           )}

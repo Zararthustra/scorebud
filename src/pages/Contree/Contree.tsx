@@ -4,6 +4,8 @@ import { getLS } from '@services/localStorageService';
 import { ContreeCounter, Setup } from '@components/index';
 
 import './Contree.scss';
+import { Tabs } from 'antd';
+import { contreePoints } from '@assets/index';
 
 const Contree = () => {
   const [setup, setSetup] = useState<string>(getLS('contree'));
@@ -13,7 +15,35 @@ const Contree = () => {
       <>
         <div className="Contree pb-5 px-1">
           <h1 className="mt-5">La Belote Contrée</h1>
-          <Setup setSetup={setSetup} />
+          <Tabs
+            defaultActiveKey="1"
+            size="small"
+            className="Contree__tabs"
+            items={[
+              {
+                label: 'Calcul',
+                key: '1',
+                children: (
+                  <div className="mt-1">
+                    <Setup setSetup={setSetup} />
+                  </div>
+                )
+              },
+              {
+                label: 'Points',
+                key: '2',
+                children: (
+                  <div className="mt-1">
+                    <img
+                      className="Contree__img"
+                      src={contreePoints}
+                      alt="Valeur des cartes"
+                    />
+                  </div>
+                )
+              }
+            ]}
+          />
         </div>
       </>
     );
