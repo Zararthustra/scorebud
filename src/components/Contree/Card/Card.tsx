@@ -81,7 +81,7 @@ const Card = ({ value, trump, points, setPoints }: ICardProps) => {
 
   const handleClick = () => {
     if (clicked) return;
-    navigator.vibrate(50);
+    if (navigator.vibrate) navigator.vibrate(50);
     if (!!trump) {
       handleTrumpCounter();
       setClicked(true);

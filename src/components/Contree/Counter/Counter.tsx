@@ -153,7 +153,7 @@ const Counter = ({ setSetup, setup }: ICounterProps) => {
   };
 
   return (
-    <div className="Counter">
+    <div className="CounterContree">
       <IconClose
         className="self-start"
         style={{ color: 'var(--color-primary-500)', cursor: 'pointer' }}
@@ -167,10 +167,10 @@ const Counter = ({ setSetup, setup }: ICounterProps) => {
       <div
         className="flex align-end gap-05 my-1"
         style={{ position: 'relative' }}>
-        <p className="Counter__counter">{score}</p>
+        <p className="CounterContree__counter">{score}</p>
         {!capot && (
           <div
-            className="Counter__contract"
+            className="CounterContree__contract"
             style={
               setup.bid === calculateTeam && score >= objective
                 ? { color: 'var(--color-green-500)' }
@@ -186,41 +186,45 @@ const Counter = ({ setSetup, setup }: ICounterProps) => {
       {/* Infos */}
       <div className="flex flex-wrap justify-evenly tag--info p-05 gap-05">
         <div className="flex gap-05">
-          <p className="Counter__setup">Enchère:</p>
-          <p className="Counter__setup">{setup.bid}</p>
+          <p className="CounterContree__setup">Enchère:</p>
+          <p className="CounterContree__setup">{setup.bid}</p>
         </div>
 
         <div className="flex gap-05">
-          <p className="Counter__setup">Contrat:</p>
-          <p className="Counter__setup">{setup.contract}</p>
+          <p className="CounterContree__setup">Contrat:</p>
+          <p className="CounterContree__setup">{setup.contract}</p>
         </div>
 
         <div className="flex gap-05">
-          <p className="Counter__setup">Atout:</p>
-          <p className="Counter__setup">{tradTrump(setup.trump)}</p>
+          <p className="CounterContree__setup">Atout:</p>
+          <p className="CounterContree__setup">{tradTrump(setup.trump)}</p>
         </div>
 
         <div className="flex gap-05">
-          <p className="Counter__setup">Dix de der:</p>
-          <p className="Counter__setup">{setup.lastPli}</p>
+          <p className="CounterContree__setup">Dix de der:</p>
+          <p className="CounterContree__setup">{setup.lastPli}</p>
         </div>
 
         <div className="flex gap-05">
-          <p className="Counter__setup">Rebelote:</p>
-          <p className="Counter__setup">
+          <p className="CounterContree__setup">Rebelote:</p>
+          <p className="CounterContree__setup">
             {setup.rebelote ? setup.rebeloteTeam : 'non'}
           </p>
         </div>
 
         <div className="flex gap-05">
-          <p className="Counter__setup">Contré:</p>
-          <p className="Counter__setup">{setup.contre ? 'oui' : 'non'}</p>
+          <p className="CounterContree__setup">Contré:</p>
+          <p className="CounterContree__setup">
+            {setup.contre ? 'oui' : 'non'}
+          </p>
         </div>
 
         {setup.contre && (
           <div className="flex gap-05">
-            <p className="Counter__setup">Surcontré:</p>
-            <p className="Counter__setup">{setup.surcontre ? 'oui' : 'non'}</p>
+            <p className="CounterContree__setup">Surcontré:</p>
+            <p className="CounterContree__setup">
+              {setup.surcontre ? 'oui' : 'non'}
+            </p>
           </div>
         )}
       </div>
