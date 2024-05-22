@@ -52,3 +52,5 @@ export { default as IconHeart } from './svg/IconHeart';
 export { default as IconSpade } from './svg/IconSpade';
 export { default as IconClub } from './svg/IconClub';
 export { default as IconDiamond } from './svg/IconDiamond';
+export { default as IconTimerPlay } from './svg/IconTimerPlay';
+export { default as IconTimerStop } from './svg/IconTimerStop';

@@ -9,6 +9,7 @@ export { default as Sidebar } from './Sidebar/Sidebar';
 export { default as ScoreTable } from './ScoreTable/ScoreTable';
 export { default as Player } from './Player/Player';
 export { default as Dice } from './Dice/Dice';
+export { default as Timer } from './Timer/Timer';
 
 // Living Forest
 export { default as Counter } from './LivingForest/Counter/Counter';

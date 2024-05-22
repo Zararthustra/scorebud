@@ -1,11 +1,11 @@
 import { useContext, useState } from 'react';
 
 import { IconReset } from '@assets/index';
+import { setLS } from '@services/localStorageService';
 import AppContext, { IAppContext } from '@services/AppContext';
-import { Button, ModalAddPlayers, ScoreTable } from '@components/index';
+import { Button, ModalAddPlayers, ScoreTable, Timer } from '@components/index';
 
 import './Score.scss';
-import { setLS } from '@services/localStorageService';
 
 const Score = () => {
   const { players, setPlayers } = useContext<IAppContext>(AppContext);
@@ -20,7 +20,9 @@ const Score = () => {
       />
 
       <div className="Score">
-        <h1 className=" mt-5 mb-2">Scores</h1>
+        <Timer />
+
+        <h1 className="mb-2">Scores</h1>
 
         {players.length > 0 && <ScoreTable players={players} />}
 
