@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [2.1.0](https://github.com/Zararthustra/scorebud/compare/v2.0.0...v2.1.0) (2026-10-20)
+
+
+### Features
+
+* **pwa:** force service worker updates (autoUpdate) ([46b0641](https://github.com/Zararthustra/scorebud/commit/46b0641e1f2712e713636c17df162d69289bfcea))
+
+
+### Bug Fixes
+
+* **deploy:** ship .htaccess to prod and revalidate sw.js, index.html, manifest ([8c901a3](https://github.com/Zararthustra/scorebud/commit/8c901a3257bfd13b976a682f78d54c32f3b9d778))
+
 ## [2.0.0](https://github.com/Zararthustra/scorebud/compare/v0.2.1...v2.0.0) (2026-10-20)
 
 
