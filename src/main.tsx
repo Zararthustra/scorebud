@@ -1,18 +1,20 @@
-import React from 'react';
-
-import { QueryClientProvider, QueryClient } from '@tanstack/react-query';
-import ReactDOM from 'react-dom/client';
-
+import { StrictMode } from 'react';
+import { createRoot } from 'react-dom/client';
+import { BrowserRouter } from 'react-router';
+import '@fontsource-variable/fredoka';
+import '@fontsource-variable/figtree';
+import './styles/tokens.css';
+import './styles/components.css';
+import './styles/app.css';
 import App from './App';
+import { nettoyerAnciennesCles } from './core/stockage';
 
-import './styles/index.scss';
+nettoyerAnciennesCles();
 
-const queryClient = new QueryClient();
-
-ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
-  <React.StrictMode>
-    <QueryClientProvider client={queryClient}>
+createRoot(document.getElementById('root')!).render(
+  <StrictMode>
+    <BrowserRouter>
       <App />
-    </QueryClientProvider>
-  </React.StrictMode>
+    </BrowserRouter>
+  </StrictMode>
 );

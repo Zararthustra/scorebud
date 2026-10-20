@@ -1,64 +1,28 @@
-import frFR from 'antd/locale/fr_FR';
-import { ConfigProvider, App as AntApp } from 'antd';
-import { useRegisterSW } from 'virtual:pwa-register/react';
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import { Navigate, Route, Routes } from 'react-router';
+import { Catalogue } from './app/Catalogue';
+import { EcranJeu } from './app/EcranJeu';
+import { PageIntrouvable } from './app/PageIntrouvable';
+import { Toasts } from './app/Toasts';
+import { modules } from './modules';
 
-import AppWrapper from '@services/AppWrapper';
-import { Contree, LivingForest, Rules, Score } from '@pages/index';
-import { Dice, ModalReloadSW } from '@components/index';
-
-const App = () => {
-  const {
-    offlineReady: [offlineReady, setOfflineReady],
-    needRefresh: [needRefresh, setNeedRefresh],
-    updateServiceWorker
-  } = useRegisterSW({
-    onRegistered(r: any) {
-      // eslint-disable-next-line prefer-template
-      console.log('SW Registered');
-    },
-    onRegisterError(error: any) {
-      console.log('SW registration error', error);
-    }
-  });
-
-  const close = () => {
-    setOfflineReady(false);
-    setNeedRefresh(false);
-  };
-
+/** Routes générées depuis la liste des modules ; anciennes adresses redirigées vers l'accueil (R26). */
+export default function App() {
   return (
-    <ConfigProvider
-      locale={frFR}
-      theme={{
-        token: { colorPrimary: '#b24592', borderRadius: 3 },
-        components: {
-          Tabs: {
-            horizontalMargin: '0'
-          }
-        }
-      }}>
-      <AntApp>
-        <BrowserRouter>
-          <ModalReloadSW
-            offlineReady={offlineReady}
-            needRefresh={needRefresh}
-            close={close}
-            updateServiceWorker={updateServiceWorker}
+    <>
+      <Routes>
+        <Route path="/" element={<Catalogue />} />
+        {modules.map((m) => (
+          <Route
+            key={m.id}
+            path={m.route}
+            element={<EcranJeu key={m.id} module={m} />}
           />
-          <Routes>
-            <Route element={<AppWrapper />}>
-              <Route element={<Score />} path="/" />
-              <Route element={<Dice />} path="/dice" />
-              <Route element={<Rules />} path="/regles" />
-              <Route element={<LivingForest />} path="/living-forest" />
-              <Route element={<Contree />} path="/belote-contree" />
-            </Route>
-          </Routes>
-        </BrowserRouter>
-      </AntApp>
-    </ConfigProvider>
+        ))}
+        <Route path="/dice" element={<Navigate to="/" replace />} />
+        <Route path="/regles" element={<Navigate to="/" replace />} />
+        <Route path="*" element={<PageIntrouvable />} />
+      </Routes>
+      <Toasts />
+    </>
   );
-};
-
-export default App;
+}
