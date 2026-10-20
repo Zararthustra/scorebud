@@ -43,6 +43,8 @@ jobs:
           name: dist
           path: dist
           retention-days: 7
+          # Sans ça, .htaccess (fichier caché) n'arrivait pas sur prod : routes en 404.
+          include-hidden-files: true
 
       - name: Tests unitaires (Vitest)
         run: npm test
