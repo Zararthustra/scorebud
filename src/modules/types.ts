@@ -5,7 +5,7 @@ import type { ParticipantId, Partie, Points } from '../core/partie';
 /** Ce que l'application donne à un onglet de saisie (plan technique §4) : le module ne touche jamais au stockage (R3). */
 export type PropsSaisie<B> = {
   partie: Partie<B>; // lecture seule
-  majBrouillon: (b: B) => void;
+  majBrouillon: (b: B, annulable?: string) => void; // avec un message : action T1, toast « Annuler » (ADR-011)
   ajouterSaisie: (
     points: Points,
     toast?: { message: string; voirScore?: boolean }

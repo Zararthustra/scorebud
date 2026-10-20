@@ -395,14 +395,17 @@ a.sb-btn {
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: var(--touch-min);
+  /* 44px au plus ; sur un écran étroit (320px) les 7 colonnes rétrécissent au lieu de déborder. */
+  flex: 1 1 0;
+  min-width: 0;
+  max-width: var(--touch-min);
 }
 .sb-roue__fleche {
   all: unset;
   box-sizing: border-box;
   display: grid;
   place-items: center;
-  width: var(--touch-min);
+  width: 100%;
   height: var(--touch-min);
   border-radius: var(--radius-full);
   color: var(--brand-text);
@@ -416,7 +419,9 @@ a.sb-btn {
 .sb-roue__valeur {
   display: grid;
   place-items: center;
-  width: 40px;
+  box-sizing: border-box;
+  width: 100%;
+  max-width: 40px;
   height: 52px;
   border-radius: var(--radius-sm);
   background: var(--raised);
@@ -481,4 +486,388 @@ a.sb-btn {
   outline: 2px solid var(--focus);
   outline-offset: -2px;
   border-radius: var(--radius-xs);
+}
+
+/* Mise en page commune aux modules */
+.sb-nombre {
+  font-family: var(--font-text);
+  font-variant-numeric: tabular-nums;
+}
+.sb-stack--colle {
+  gap: 2px;
+}
+.sb-grille-2 {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--space-2);
+}
+.sb-row--centre {
+  justify-content: center;
+  gap: var(--space-1) var(--space-2);
+}
+.sb-centre {
+  align-self: center;
+}
+.sb-carte-section {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-5);
+  padding: var(--space-5);
+  border-radius: var(--radius-lg);
+  background: var(--surface);
+  box-shadow: var(--shadow-1);
+}
+.sb-entete-section {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-3);
+}
+.sb-select {
+  appearance: none;
+  padding-right: var(--space-10);
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='20' viewBox='0 0 24 24' fill='none' stroke='%237b7275' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 14px center;
+  font-variant-numeric: tabular-nums;
+}
+.sb-option-dependante {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  padding-top: var(--space-4);
+  border-top: 1px solid var(--border);
+}
+.sb-sous-options {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  padding-left: var(--space-4);
+  border-left: 2px solid var(--border);
+}
+.sb-regle {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+  padding-bottom: var(--space-3);
+  border-bottom: 1px solid var(--border);
+}
+.sb-table .sb-table__rang {
+  text-align: left;
+  font: var(--text-body-strong);
+  color: var(--fg);
+}
+
+/* Contrée (maquettes Contree-reglage, comptage, resultat) */
+.sb-totaux {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--space-2);
+}
+.sb-totaux__equipe,
+.sb-resultat {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: var(--space-3) var(--space-4);
+  border-radius: var(--radius-md);
+  background: var(--surface);
+  box-shadow: var(--shadow-1);
+}
+.sb-resultat {
+  gap: var(--space-1);
+  padding: var(--space-4);
+  background: var(--bg);
+  box-shadow: none;
+}
+.sb-totaux__note {
+  grid-column: 1 / -1;
+}
+.sb-etapes {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--space-2);
+  font: var(--text-label);
+  color: var(--fg-muted);
+}
+.sb-etapes li {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.sb-etapes__pastille {
+  display: grid;
+  place-items: center;
+  width: 24px;
+  height: 24px;
+  border-radius: var(--radius-full);
+  box-shadow: inset 0 0 0 1.5px var(--border-strong);
+  font: 700 12px/1 var(--font-text);
+}
+.sb-etapes [aria-current='step'] {
+  color: var(--brand-text);
+}
+.sb-etapes [aria-current='step'] .sb-etapes__pastille {
+  background: var(--brand);
+  color: var(--on-brand);
+  box-shadow: none;
+}
+.sb-etapes .sb-etapes--faite {
+  color: var(--fg);
+}
+.sb-etapes--faite .sb-etapes__pastille {
+  background: var(--brand-soft);
+  color: var(--brand-text);
+  box-shadow: none;
+}
+.sb-resume {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  padding: var(--space-2) var(--space-2) var(--space-2) var(--space-4);
+  border-radius: var(--radius-md);
+  background: var(--surface);
+  box-shadow: inset 0 0 0 1px var(--border);
+}
+.sb-resume p {
+  flex: 1;
+}
+.sb-cartes {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--space-2);
+}
+/* R15 : une carte comptée reste magenta, avec coche et fond marqué ; le vert est réservé à la réussite. */
+.sb-carte-jeu {
+  all: unset;
+  box-sizing: border-box;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2px;
+  min-height: 96px;
+  padding: var(--space-2);
+  border-radius: var(--radius-md);
+  background: var(--surface);
+  color: var(--fg);
+  box-shadow:
+    inset 0 0 0 1.5px var(--border-strong),
+    var(--shadow-1);
+  cursor: pointer;
+}
+.sb-carte-jeu .caption {
+  color: var(--fg-muted);
+}
+.sb-carte-jeu[data-comptee] {
+  background: color-mix(in srgb, var(--brand) 22%, var(--surface));
+  box-shadow: inset 0 0 0 3px var(--brand-text);
+}
+.sb-carte-jeu[data-comptee] .caption {
+  color: var(--fg);
+  font-weight: 700;
+}
+.sb-carte-jeu:focus-visible {
+  outline: 2px solid var(--focus);
+  outline-offset: 2px;
+}
+.sb-carte-jeu__coche {
+  position: absolute;
+  top: 6px;
+  right: 6px;
+  display: grid;
+  place-items: center;
+  width: 24px;
+  height: 24px;
+  border-radius: var(--radius-full);
+  background: var(--brand);
+  color: var(--on-brand);
+}
+.sb-panneau {
+  position: sticky;
+  bottom: 0;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  margin: 0 calc(-1 * var(--space-4)) calc(-1 * var(--space-6));
+  padding: var(--space-4) var(--space-4) var(--space-6);
+  border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+  background: var(--raised);
+  box-shadow: var(--shadow-2);
+}
+/* WCAG 2.4.11 : un élément qui reçoit le focus ou défile jusqu'à l'écran ne passe pas sous le panneau collé en bas. */
+html:has(.sb-panneau) {
+  scroll-padding-bottom: 240px;
+}
+.sb-panneau__ligne {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: var(--space-3);
+}
+.sb-etat {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px var(--space-3);
+  border-radius: var(--radius-full);
+  background: var(--surface);
+  box-shadow: inset 0 0 0 1.5px var(--border-strong);
+  color: var(--fg);
+  font: var(--text-body-strong);
+}
+.sb-etat--rempli {
+  box-shadow: inset 0 0 0 1.5px var(--success);
+  color: var(--success);
+}
+
+/* Living Forest (maquette LF-tour) */
+.sb-zone {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  padding: var(--space-3) var(--space-4) var(--space-4);
+  border-radius: var(--radius-lg);
+  background: var(--surface);
+  box-shadow: var(--shadow-1);
+}
+.sb-ligne-compteur {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  min-height: 64px;
+  border-bottom: 1px solid var(--border);
+}
+/* Les PNG de l'ancienne version ont un fond blanc opaque : on en fait une tuile arrondie, nette dans les deux thèmes. */
+.sb-ligne-compteur__icone,
+.sb-totaux-ressources img {
+  border-radius: var(--radius-sm);
+  background: #fff;
+}
+.sb-ligne-compteur__icone {
+  flex: none;
+  width: 40px;
+  height: 40px;
+  object-fit: contain;
+}
+.sb-ligne-compteur__libelle {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+.sb-ligne-compteur__valeur {
+  min-width: 2ch;
+  text-align: center;
+}
+.sb-counter__btn--m {
+  width: var(--touch-comfort);
+  height: var(--touch-comfort);
+}
+.sb-totaux-ressources {
+  margin: 0;
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 6px;
+}
+.sb-totaux-ressources div {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-1);
+  padding: 10px var(--space-1);
+  border-radius: var(--radius-md);
+  background: var(--surface);
+  box-shadow: inset 0 0 0 1px var(--border);
+}
+.sb-totaux-ressources img {
+  display: block;
+  width: 32px;
+  height: 32px;
+  object-fit: contain;
+}
+.sb-totaux-ressources dd {
+  margin: 0;
+}
+
+/* Outils : dé et minuteur (maquettes Outil-de, Outil-minuteur) */
+.sb-outil {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-5);
+}
+.sb-centre-texte {
+  text-align: center;
+}
+.sb-minuteur__valeur {
+  min-width: 4ch;
+  text-align: center;
+}
+.sb-minuteur-barre {
+  gap: 6px;
+  padding: 0 var(--space-3);
+  color: var(--brand-text);
+  font-variant-numeric: tabular-nums;
+}
+.sb-de {
+  box-sizing: border-box;
+  width: 136px;
+  height: 136px;
+  padding: var(--space-6);
+  display: grid;
+  grid-template: repeat(3, minmax(0, 1fr)) / repeat(3, minmax(0, 1fr));
+  place-items: center;
+  border-radius: 28px;
+  background: var(--brand-mark);
+  box-shadow:
+    inset -8px -10px 0 var(--brand-mark-deep),
+    var(--shadow-2);
+  transform: rotate(-6deg);
+}
+.sb-de__point {
+  width: 22px;
+  height: 22px;
+  border-radius: var(--radius-full);
+  background: var(--on-mark);
+}
+/* OUT-01 : rotation 3D courte ; supprimée sous prefers-reduced-motion par la règle du design system. */
+.sb-de--lance {
+  animation: sb-de-lancer 600ms var(--ease-out);
+}
+@keyframes sb-de-lancer {
+  from {
+    transform: perspective(400px) rotateX(540deg) rotateY(360deg) rotate(-6deg);
+  }
+}
+
+/* Mise à jour de la PWA : bandeau non bloquant en bas (spec 00 §8) */
+.sb-mise-a-jour {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: var(--space-3);
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  max-width: calc(480px - 2 * var(--space-3));
+  margin: 0 auto;
+  padding: var(--space-2) var(--space-2) var(--space-2) var(--space-4);
+  border-radius: var(--radius-md);
+  background: var(--raised);
+  color: var(--fg);
+  box-shadow: var(--shadow-2);
+}
+.sb-mise-a-jour > svg {
+  flex: none;
+  color: var(--info);
+}
+.sb-mise-a-jour__texte {
+  flex: 1;
+  font: var(--text-body-strong);
 }

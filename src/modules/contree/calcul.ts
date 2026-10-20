@@ -30,6 +30,22 @@ const TOTAL_CARTES = 152;
 const autre = (e: Equipe): Equipe => (e === 'A' ? 'B' : 'A');
 const arrondir = (n: number) => Math.floor((n + 5) / 10) * 10; // dizaine la plus proche, 5 vers le haut
 
+/** Cartes de l'équipe + 10 si elle a le dix de der. */
+export function pointsDePli(e: EntreeDonne, x: Equipe) {
+  const cartes =
+    e.cartes.equipe === x ? e.cartes.points : TOTAL_CARTES - e.cartes.points;
+  return cartes + (e.dernierPli === x ? 10 : 0);
+}
+
+/** §5.1 étape 3 : capot ou tous les plis décident seuls ; sinon pli + belote de la preneuse ≥ contrat (égalité = rempli). */
+export function contratRempli(e: EntreeDonne) {
+  if (e.contrat === 'capot' || e.tousLesPlis !== null)
+    return e.tousLesPlis === e.preneuse;
+  return (
+    pointsDePli(e, e.preneuse) + (e.belote === e.preneuse ? 20 : 0) >= e.contrat
+  );
+}
+
 /** Points de la donne pour A et B (spec 11 §5.1). Refuse une entrée invalide (R5). */
 export function calculerDonne(e: EntreeDonne): { A: number; B: number } {
   const { points } = e.cartes;
@@ -44,21 +60,14 @@ export function calculerDonne(e: EntreeDonne): { A: number; B: number } {
   const P = e.preneuse;
   const D = autre(P);
   const m = e.multiplicateur;
-  const cartes = {
-    [e.cartes.equipe]: points,
-    [autre(e.cartes.equipe)]: TOTAL_CARTES - points
-  } as Record<Equipe, number>;
-  const pli = (x: Equipe) => cartes[x] + (e.dernierPli === x ? 10 : 0);
-  const belote = (x: Equipe) => (e.belote === x ? 20 : 0);
+  const pli = (x: Equipe) => pointsDePli(e, x);
+  const rempli = contratRempli(e);
   const res = { A: 0, B: 0 };
 
   if (e.contrat === 'capot') {
-    const rempli = e.tousLesPlis === P;
     res[rempli ? P : D] = 500 * m;
   } else {
     const v = e.contrat;
-    const rempli =
-      e.tousLesPlis !== null ? e.tousLesPlis === P : pli(P) + belote(P) >= v;
     const base = e.tousLesPlis !== null ? 250 : 160;
     if (m > 1) res[rempli ? P : D] = m * (base + v);
     else if (!rempli) res[D] = base + v;

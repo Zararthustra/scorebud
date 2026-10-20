@@ -7,6 +7,7 @@ import './styles/tokens.css';
 import './styles/components.css';
 import './styles/app.css';
 import App from './App';
+import { MiseAJour } from './app/MiseAJour';
 import { nettoyerAnciennesCles } from './core/stockage';
 
 nettoyerAnciennesCles();
@@ -15,6 +16,7 @@ createRoot(document.getElementById('root')!).render(
   <StrictMode>
     <BrowserRouter>
       <App />
+      <MiseAJour />
     </BrowserRouter>
   </StrictMode>
 );
