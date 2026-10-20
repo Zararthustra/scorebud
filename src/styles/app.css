@@ -788,3 +788,54 @@ html:has(.sb-panneau) {
 .sb-totaux-ressources dd {
   margin: 0;
 }
+
+/* Outils : dé et minuteur (maquettes Outil-de, Outil-minuteur) */
+.sb-outil {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-5);
+}
+.sb-centre-texte {
+  text-align: center;
+}
+.sb-minuteur__valeur {
+  min-width: 4ch;
+  text-align: center;
+}
+.sb-minuteur-barre {
+  gap: 6px;
+  padding: 0 var(--space-3);
+  color: var(--brand-text);
+  font-variant-numeric: tabular-nums;
+}
+.sb-de {
+  box-sizing: border-box;
+  width: 136px;
+  height: 136px;
+  padding: var(--space-6);
+  display: grid;
+  grid-template: repeat(3, minmax(0, 1fr)) / repeat(3, minmax(0, 1fr));
+  place-items: center;
+  border-radius: 28px;
+  background: var(--brand-mark);
+  box-shadow:
+    inset -8px -10px 0 var(--brand-mark-deep),
+    var(--shadow-2);
+  transform: rotate(-6deg);
+}
+.sb-de__point {
+  width: 22px;
+  height: 22px;
+  border-radius: var(--radius-full);
+  background: var(--on-mark);
+}
+/* OUT-01 : rotation 3D courte ; supprimée sous prefers-reduced-motion par la règle du design system. */
+.sb-de--lance {
+  animation: sb-de-lancer 600ms var(--ease-out);
+}
+@keyframes sb-de-lancer {
+  from {
+    transform: perspective(400px) rotateX(540deg) rotateY(360deg) rotate(-6deg);
+  }
+}

@@ -2,6 +2,7 @@ import type { ReactNode } from 'react';
 import { Link } from 'react-router';
 import { Icone } from '../ui/Icone';
 import logo from '../ui/logo.svg';
+import { Outils } from '../outils/Outils';
 
 /** Barre du haut (R2) : catalogue (logo et nom) ou jeu (retour, nom du jeu). Les outils s'ajoutent à droite. */
 export function BarreHaut({
@@ -29,6 +30,7 @@ export function BarreHaut({
           <span className="sb-barre__titre h2">ScoreBud</span>
         </>
       )}
+      <Outils />
       {children}
     </header>
   );
