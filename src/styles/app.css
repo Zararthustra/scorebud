@@ -1,0 +1,24 @@
+/* Mise en page de l'application ; tokens.css et components.css restent des copies du design system. */
+:root {
+  /* @fontsource-variable déclare « Fredoka Variable » et « Figtree Variable », tokens.css attend « Fredoka » et « Figtree ». */
+  --font-display: 'Fredoka Variable', 'Fredoka', 'Nunito', ui-rounded, system-ui, sans-serif;
+  --font-text: 'Figtree Variable', 'Figtree', system-ui, -apple-system, 'Segoe UI', sans-serif;
+}
+
+[data-theme='dark'] {
+  color-scheme: dark;
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--fg);
+  font: var(--text-body);
+}
+
+/* R6 : V1 téléphone uniquement, sur grand écran la colonne mobile est centrée. */
+#root {
+  max-width: 480px;
+  min-height: 100dvh;
+  margin: 0 auto;
+}
