@@ -1,0 +1,14 @@
+# ADR-007 : application à une page, les routes sans « # » (/scores, /belote-contree…) renvoient index.html.
+RewriteEngine On
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^ index.html [L]
+
+# Le service worker, la page et le manifeste sont revalidés à chaque visite : sinon le cache de 7 jours
+# du serveur peut retarder la découverte d'une nouvelle version. Les fichiers de assets/ ont un nom
+# haché et gardent le cache long.
+<IfModule mod_headers.c>
+  <FilesMatch "^(sw\.js|index\.html|manifest\.webmanifest)$">
+    Header set Cache-Control "no-cache"
+  </FilesMatch>
+</IfModule>
