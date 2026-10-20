@@ -720,3 +720,71 @@ html:has(.sb-panneau) {
   box-shadow: inset 0 0 0 1.5px var(--success);
   color: var(--success);
 }
+
+/* Living Forest (maquette LF-tour) */
+.sb-zone {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  padding: var(--space-3) var(--space-4) var(--space-4);
+  border-radius: var(--radius-lg);
+  background: var(--surface);
+  box-shadow: var(--shadow-1);
+}
+.sb-ligne-compteur {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  min-height: 64px;
+  border-bottom: 1px solid var(--border);
+}
+/* Les PNG de l'ancienne version ont un fond blanc opaque : on en fait une tuile arrondie, nette dans les deux thèmes. */
+.sb-ligne-compteur__icone,
+.sb-totaux-ressources img {
+  border-radius: var(--radius-sm);
+  background: #fff;
+}
+.sb-ligne-compteur__icone {
+  flex: none;
+  width: 40px;
+  height: 40px;
+  object-fit: contain;
+}
+.sb-ligne-compteur__libelle {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+.sb-ligne-compteur__valeur {
+  min-width: 2ch;
+  text-align: center;
+}
+.sb-counter__btn--m {
+  width: var(--touch-comfort);
+  height: var(--touch-comfort);
+}
+.sb-totaux-ressources {
+  margin: 0;
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 6px;
+}
+.sb-totaux-ressources div {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-1);
+  padding: 10px var(--space-1);
+  border-radius: var(--radius-md);
+  background: var(--surface);
+  box-shadow: inset 0 0 0 1px var(--border);
+}
+.sb-totaux-ressources img {
+  display: block;
+  width: 32px;
+  height: 32px;
+  object-fit: contain;
+}
+.sb-totaux-ressources dd {
+  margin: 0;
+}

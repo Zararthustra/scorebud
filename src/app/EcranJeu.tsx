@@ -155,6 +155,7 @@ export function EcranJeu({ module }: { module: ModuleDeJeu }) {
           </>
         ) : (
           <Tabs
+            navigation
             libelle={module.nom}
             onglets={onglets}
             valeur={onglet}
