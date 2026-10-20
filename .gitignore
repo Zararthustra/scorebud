@@ -8,10 +8,11 @@ pnpm-debug.log*
 lerna-debug.log*
 
 node_modules
-package-lock.json
 .env
 dist
 dist-ssr
+test-results
+playwright-report
 *.local
 
 # Editor directories and files
@@ -24,3 +25,10 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# Skill UX : copie locale pour Claude Code, non nécessaire au build
+.claude/skills/ux-design-patterns/
+
+# Documents du process (specs, maquettes, consignes Claude) : gardés en local, hors du repo
+CLAUDE.md
+docs/
