@@ -7,7 +7,8 @@ export default defineConfig({
     react(),
     // ADR-007 : même chemin (/sw.js) et même scope (/) que l'ancienne PWA, pour la remplacer proprement.
     VitePWA({
-      registerType: 'prompt',
+      // Mise à jour forcée (Arthur, 2026-10-21) : le nouveau SW prend la main dès qu'il est trouvé et la page se recharge ; la partie est déjà enregistrée.
+      registerType: 'autoUpdate',
       filename: 'sw.js',
       scope: '/',
       includeAssets: ['favicon.ico'],

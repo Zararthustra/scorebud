@@ -844,30 +844,3 @@ html:has(.sb-panneau) {
     transform: perspective(400px) rotateX(540deg) rotateY(360deg) rotate(-6deg);
   }
 }
-
-/* Mise à jour de la PWA : bandeau non bloquant en bas (spec 00 §8) */
-.sb-mise-a-jour {
-  position: fixed;
-  left: 0;
-  right: 0;
-  bottom: var(--space-3);
-  z-index: 10;
-  display: flex;
-  align-items: center;
-  gap: var(--space-2);
-  max-width: calc(480px - 2 * var(--space-3));
-  margin: 0 auto;
-  padding: var(--space-2) var(--space-2) var(--space-2) var(--space-4);
-  border-radius: var(--radius-md);
-  background: var(--raised);
-  color: var(--fg);
-  box-shadow: var(--shadow-2);
-}
-.sb-mise-a-jour > svg {
-  flex: none;
-  color: var(--info);
-}
-.sb-mise-a-jour__texte {
-  flex: 1;
-  font: var(--text-body-strong);
-}
