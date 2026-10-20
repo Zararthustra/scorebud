@@ -1,6 +1,5 @@
 /* ScoreBud — generated from tokens.json */
-:root,
-[data-theme='light'] {
+:root, [data-theme="light"] {
   --bg: #fbf0f4; /* Fond de page. Texte `fg` et `fg-muted` dessus. */
   --surface: #fff8fa; /* Cartes, tableau de scores, feuilles. Texte `fg` et `fg-muted` dessus. */
   --raised: #ffffff; /* Éléments au-dessus d'une surface : feuille ouverte, toast, menu. Texte `fg` dessus. */
@@ -34,16 +33,11 @@
   --player-10: #8e5a34; /* Repère de couleur du joueur 10 (pastille, filet de colonne). 3:1 minimum sur `surface` et `raised`. Jamais seule : le nom du joueur l'accompagne, et jamais de texte posé dessus. Au-delà de 12 joueurs, la série recommence à `player-1`. */
   --player-11: #5a6b7e; /* Repère de couleur du joueur 11 (pastille, filet de colonne). 3:1 minimum sur `surface` et `raised`. Jamais seule : le nom du joueur l'accompagne, et jamais de texte posé dessus. Au-delà de 12 joueurs, la série recommence à `player-1`. */
   --player-12: #c22f3a; /* Repère de couleur du joueur 12 (pastille, filet de colonne). 3:1 minimum sur `surface` et `raised`. Jamais seule : le nom du joueur l'accompagne, et jamais de texte posé dessus. Au-delà de 12 joueurs, la série recommence à `player-1`. */
-  --shadow-1:
-    0 1px 2px 0 rgba(22, 15, 18, 0.14), 0 2px 6px 0 rgba(22, 15, 18, 0.08); /* Élément posé : carte, puce sélectionnée. */
-  --shadow-2:
-    0 2px 4px 0 rgba(22, 15, 18, 0.14), 0 8px 16px 0 rgba(22, 15, 18, 0.12),
-    0 16px 32px 0 rgba(22, 15, 18, 0.08); /* Toast, menu : au-dessus du contenu. */
-  --shadow-3:
-    0 2px 4px 0 rgba(22, 15, 18, 0.16), 0 12px 24px 0 rgba(22, 15, 18, 0.16),
-    0 32px 64px 0 rgba(22, 15, 18, 0.14); /* Feuille ouverte (le plus haut). */
+  --shadow-1: 0 1px 2px 0 rgba(22,15,18,0.14), 0 2px 6px 0 rgba(22,15,18,0.08); /* Élément posé : carte, puce sélectionnée. */
+  --shadow-2: 0 2px 4px 0 rgba(22,15,18,0.14), 0 8px 16px 0 rgba(22,15,18,0.12), 0 16px 32px 0 rgba(22,15,18,0.08); /* Toast, menu : au-dessus du contenu. */
+  --shadow-3: 0 2px 4px 0 rgba(22,15,18,0.16), 0 12px 24px 0 rgba(22,15,18,0.16), 0 32px 64px 0 rgba(22,15,18,0.14); /* Feuille ouverte (le plus haut). */
 }
-[data-theme='dark'] {
+[data-theme="dark"] {
   --bg: #110c0d;
   --surface: #1b1416;
   --raised: #261e21;
@@ -102,14 +96,9 @@
   --duration-base: 200ms; /* Entrée d'un élément, changement d'état. */
   --duration-slow: 300ms; /* Feuille, onglets : maximum pour une entrée. */
   --ease-out: cubic-bezier(0.22, 1, 0.36, 1); /* Entrées. Par défaut. */
-  --ease-in: cubic-bezier(
-    0.55,
-    0,
-    1,
-    0.45
-  ); /* Sorties (plus rapides que les entrées). */
-  --font-display: 'Fredoka', 'Nunito', ui-rounded, system-ui, sans-serif;
-  --font-text: 'Figtree', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --ease-in: cubic-bezier(0.55, 0, 1, 0.45); /* Sorties (plus rapides que les entrées). */
+  --font-display: "Fredoka", "Nunito", ui-rounded, system-ui, sans-serif;
+  --font-text: "Figtree", system-ui, -apple-system, "Segoe UI", sans-serif;
   --text-score-xl: 700 72px/72px var(--font-display); /* Le nombre d'un compteur en plein écran (points de la manche). */
   --text-score-l: 700 48px/48px var(--font-display); /* Nombre d'un compteur dans une grille, total du tableau. */
   --text-score-m: 600 28px/32px var(--font-display); /* Nombre d'un compteur en liste, à côté d'une icône (ressources, conditions de victoire). Plus discret que `score-l`. */
