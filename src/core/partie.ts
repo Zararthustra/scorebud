@@ -107,3 +107,16 @@ export function estPartie<B>(
     (v.onglet === undefined || typeof v.onglet === 'string')
   );
 }
+
+/** R10 : la case (ligne, participant) est la n-ième saisie qui concerne ce participant, comme dans `tableau`. */
+export function modifierCase(
+  saisies: Saisie[],
+  ligne: number,
+  id: ParticipantId,
+  valeur: number
+): Saisie[] {
+  const cible = saisies.filter((s) => id in s.points)[ligne];
+  return saisies.map((s) =>
+    s === cible ? { points: { ...s.points, [id]: valeur } } : s
+  );
+}

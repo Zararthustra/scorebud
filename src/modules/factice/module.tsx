@@ -42,6 +42,7 @@ export default definirModule<Brouillon>({
   route: '/factice',
   participants: { genre: 'joueurs', min: 2, max: 3 },
   retirerDerniereSaisie: true,
+  vocabulaire: { ligne: 'Tour', retirer: 'Retirer le dernier tour' },
   brouillonVide: () => ({ points: '' }),
   estBrouillon: (v): v is Brouillon =>
     typeof (v as Brouillon)?.points === 'string',

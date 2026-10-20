@@ -1,5 +1,11 @@
 import { describe, expect, test } from 'vitest';
-import { tableau, validerNom, type Participant, type Points } from './partie';
+import {
+  modifierCase,
+  tableau,
+  validerNom,
+  type Participant,
+  type Points
+} from './partie';
 
 const joueurs = (...noms: string[]): Participant[] =>
   noms.map((nom) => ({ id: nom.toLowerCase(), nom }));
@@ -84,5 +90,20 @@ describe('MOD-02 : noms', () => {
     expect(validerNom('  éloïse dU bois ', [])).toEqual({
       nom: 'Éloïse dU bois'
     });
+  });
+});
+
+describe('R10 : modifier une case', () => {
+  const saisies = manches({ a: 10, b: 5 }, { a: -3, b: 4 });
+  test('remplace la valeur de la ligne et du participant, sans toucher au reste', () => {
+    expect(modifierCase(saisies, 1, 'b', 6)).toEqual(
+      manches({ a: 10, b: 5 }, { a: -3, b: 6 })
+    );
+    expect(saisies[1].points.b).toBe(4);
+  });
+  test('scores décalés : la n-ième case est la n-ième saisie qui concerne ce participant', () => {
+    expect(
+      modifierCase(manches({ a: 3 }, { b: 5 }, { a: 2 }), 1, 'a', 9)
+    ).toEqual(manches({ a: 3 }, { b: 5 }, { a: 9 }));
   });
 });

@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import {
   nouvellePartie,
   retirerDerniereSaisie,
@@ -10,6 +11,7 @@ import { ScoreTable } from '../ui/ScoreTable';
 import logo from '../ui/logo.svg';
 import { magasin, mots } from './etat';
 import { manquants } from './Joueurs';
+import { ModifierCase, type CaseCible } from './ModifierCase';
 
 export type Fin = { terminee: boolean; gagnants: string[] } | null;
 
@@ -20,12 +22,32 @@ export const lancerNouvellePartie = (module: ModuleDeJeu, p: Partie<unknown>) =>
     'Nouvelle partie commencée'
   );
 
-const retirerDerniere = (module: ModuleDeJeu, p: Partie<unknown>) =>
-  magasin.faireAnnulable(
-    module,
-    retirerDerniereSaisie(p),
-    'Dernière saisie retirée'
+function RetirerDerniere({
+  module,
+  partie,
+  className
+}: {
+  module: ModuleDeJeu;
+  partie: Partie<unknown>;
+  className?: string;
+}) {
+  return (
+    <Button
+      variante="ghost"
+      taille="compact"
+      icone="annuler"
+      className={className}
+      onClick={() =>
+        magasin.faireAnnulable(
+          module,
+          retirerDerniereSaisie(partie),
+          'Dernière saisie retirée'
+        )
+      }>
+      {module.vocabulaire?.retirer ?? 'Retirer la dernière saisie'}
+    </Button>
   );
+}
 
 /** MOD-07 : bandeau de fin, gagnants nommés en texte, saisie impossible. */
 export function FinDePartie({
@@ -62,19 +84,16 @@ export function FinDePartie({
         Nouvelle partie
       </Button>
       {module.retirerDerniereSaisie && (
-        <Button
-          variante="ghost"
-          taille="compact"
-          icone="annuler"
-          onClick={() => retirerDerniere(module, partie)}>
-          Retirer la dernière saisie
-        </Button>
+        <RetirerDerniere module={module} partie={partie} />
       )}
     </section>
   );
 }
 
-/** Onglet « Score » commun (spec 01 §7, §9) : tableau, retrait de la dernière saisie, état vide. */
+/**
+ * Onglet « Score » commun (spec 01 §7, §9) : tableau, retrait de la dernière saisie, état vide.
+ * Un module sans « Retirer la dernière saisie » a des cases modifiables à la place (R10).
+ */
 export function OngletScore({
   module,
   partie,
@@ -86,6 +105,7 @@ export function OngletScore({
   fin: Fin;
   ouvrirJoueurs: () => void;
 }) {
+  const [cible, setCible] = useState<CaseCible | null>(null);
   const m = mots(module);
   const n = partie.participants.length;
   if (n < module.participants.min) {
@@ -107,6 +127,7 @@ export function OngletScore({
     );
   }
   const { lignes, totaux } = tableau(partie.participants, partie.saisies);
+  const casesModifiables = !module.retirerDerniereSaisie && lignes.length > 0;
   return (
     <>
       {fin?.terminee && (
@@ -115,20 +136,35 @@ export function OngletScore({
       {module.retirerDerniereSaisie &&
         partie.saisies.length > 0 &&
         !fin?.terminee && (
-          <Button
-            variante="ghost"
-            taille="compact"
-            icone="annuler"
+          <RetirerDerniere
+            module={module}
+            partie={partie}
             className="sb-fin-de-ligne"
-            onClick={() => retirerDerniere(module, partie)}>
-            Retirer la dernière saisie
-          </Button>
+          />
         )}
+      {casesModifiables && (
+        <p className="small sb-muted">
+          Touchez une case pour la modifier, un nom pour gérer les {m.plusieurs}
+          .
+        </p>
+      )}
       <ScoreTable
         participants={partie.participants}
         lignes={lignes}
         totaux={totaux}
+        libelleLigne={module.vocabulaire?.ligne}
         surNom={ouvrirJoueurs}
+        surCase={
+          casesModifiables
+            ? (ligne, participant) => setCible({ ligne, participant })
+            : undefined
+        }
+      />
+      <ModifierCase
+        module={module}
+        partie={partie}
+        cible={cible}
+        surFermeture={() => setCible(null)}
       />
     </>
   );

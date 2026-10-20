@@ -1,5 +1,5 @@
 import { describe, expect, test } from 'vitest';
-import { CHIFFRES, depuisChiffres, versChiffres } from './molettes';
+import { CHIFFRES, depuisChiffres, versChiffres } from './chiffres';
 
 describe('molettes : versChiffres / depuisChiffres (P13 : 6 chiffres)', () => {
   test.each([

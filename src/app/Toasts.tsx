@@ -45,8 +45,9 @@ export function Toasts() {
     <div className="sb-toasts">
       {annulable && annulable !== masque && (
         <Toast
-          type="info"
+          type="success"
           message={annulable.message}
+          detail={annulable.detail}
           action={{
             libelle: 'Annuler',
             icone: 'annuler',

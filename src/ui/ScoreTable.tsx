@@ -1,3 +1,4 @@
+import type { CSSProperties } from 'react';
 import type { Ligne, Participant, Points } from '../core/partie';
 
 const nombre = new Intl.NumberFormat('fr-FR');
@@ -12,12 +13,50 @@ export function NomJoueur({ nom, rang }: { nom: string; rang: number }) {
     <span className="sb-player">
       <span
         className="sb-dot"
-        style={
-          { '--c': `var(--player-${(rang % 12) + 1})` } as React.CSSProperties
-        }
+        style={{ '--c': `var(--player-${(rang % 12) + 1})` } as CSSProperties}
       />
       {nom}
     </span>
+  );
+}
+
+function Case({
+  score,
+  meilleur,
+  nom,
+  surClic
+}: {
+  score: number | null;
+  meilleur: boolean;
+  nom: string;
+  surClic?: () => void;
+}) {
+  if (score === null)
+    return (
+      <td>
+        <span aria-hidden="true">–</span>
+        <span className="sb-sr">pas de score</span>
+      </td>
+    );
+  const contenu = meilleur ? (
+    <span className="sb-best">
+      {formaterPoints(score)}
+      <span className="sb-sr"> (meilleur score)</span>
+    </span>
+  ) : (
+    formaterPoints(score)
+  );
+  if (!surClic) return <td>{contenu}</td>;
+  return (
+    <td className="sb-td-case">
+      <button
+        type="button"
+        className="sb-case"
+        aria-label={`Modifier le score de ${nom} : ${formaterPoints(score)}${meilleur ? ' (meilleur score)' : ''}`}
+        onClick={surClic}>
+        {contenu}
+      </button>
+    </td>
   );
 }
 
@@ -27,6 +66,7 @@ type Props = {
   totaux: Points;
   libelleLigne?: string;
   surNom?: () => void;
+  surCase?: (ligne: number, participant: Participant) => void; // R10 : chaque case est un bouton
 };
 
 /** Tableau commun (spec 01 §7) : vrai `<table>`, « – » pour une case vide, meilleur score nommé, défilement dans son conteneur. */
@@ -35,14 +75,14 @@ export function ScoreTable({
   lignes,
   totaux,
   libelleLigne = 'Manche',
-  surNom
+  surNom,
+  surCase
 }: Props) {
+  const ligne = libelleLigne.toLowerCase();
   return (
     <div className="sb-table-wrap">
       <table className="sb-table">
-        <caption className="sb-sr">
-          Points par {libelleLigne.toLowerCase()}
-        </caption>
+        <caption className="sb-sr">Points par {ligne}</caption>
         <thead>
           <tr>
             <th scope="col">{libelleLigne}</th>
@@ -64,21 +104,13 @@ export function ScoreTable({
             <tr key={i}>
               <td>{i + 1}</td>
               {l.scores.map((s, j) => (
-                <td key={participants[j].id}>
-                  {s === null ? (
-                    <>
-                      <span aria-hidden="true">–</span>
-                      <span className="sb-sr">pas de score</span>
-                    </>
-                  ) : l.meilleurs.includes(participants[j].id) ? (
-                    <span className="sb-best">
-                      {formaterPoints(s)}
-                      <span className="sb-sr"> (meilleur score)</span>
-                    </span>
-                  ) : (
-                    formaterPoints(s)
-                  )}
-                </td>
+                <Case
+                  key={participants[j].id}
+                  score={s}
+                  meilleur={l.meilleurs.includes(participants[j].id)}
+                  nom={`${participants[j].nom}, ${ligne} ${i + 1}`}
+                  surClic={surCase && (() => surCase(i, participants[j]))}
+                />
               ))}
             </tr>
           ))}

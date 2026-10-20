@@ -42,6 +42,7 @@ export function creerMagasin(surIllisible: (id: string) => void = () => {}) {
   let annulable: {
     id: string;
     message: string;
+    detail?: string;
     avant: Partie<unknown>;
   } | null = null;
   let minuterie: ReturnType<typeof setTimeout> | undefined;
@@ -89,12 +90,13 @@ export function creerMagasin(surIllisible: (id: string) => void = () => {}) {
   function faireAnnulable<B>(
     def: DefinitionPartie<B>,
     p: Partie<B>,
-    message: string
+    message: string,
+    detail?: string
   ) {
     const avant = partie(def);
     oublierAnnulable();
     enregistrer(def.id, p);
-    annulable = { id: def.id, message, avant };
+    annulable = { id: def.id, message, detail, avant };
     minuterie = setTimeout(() => {
       annulable = null;
       notifier();

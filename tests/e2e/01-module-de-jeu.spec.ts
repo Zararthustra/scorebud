@@ -145,7 +145,7 @@ test.describe('MOD-02 : préparer une partie', () => {
     await expect(menu).toBeFocused();
     await page.getByRole('tab', { name: 'Score' }).click();
     await expect(page.getByRole('columnheader')).toHaveText([
-      'Manche',
+      'Tour',
       'Alice',
       'Bruno'
     ]);
@@ -208,9 +208,7 @@ test.describe('onglet Score, MOD-04, MOD-05, MOD-07, GEN-09', () => {
     const cinq = page
       .locator('tbody')
       .getByRole('cell', { name: '5', exact: true });
-    await page
-      .getByRole('button', { name: 'Retirer la dernière saisie' })
-      .click();
+    await page.getByRole('button', { name: 'Retirer le dernier tour' }).click();
     await expect(cinq).toHaveCount(0);
     await page
       .getByRole('status')
@@ -218,9 +216,7 @@ test.describe('onglet Score, MOD-04, MOD-05, MOD-07, GEN-09', () => {
       .getByRole('button', { name: 'Annuler' })
       .click();
     await expect(cinq).toBeVisible();
-    await page
-      .getByRole('button', { name: 'Retirer la dernière saisie' })
-      .click();
+    await page.getByRole('button', { name: 'Retirer le dernier tour' }).click();
     await page.clock.runFor(5000);
     await expect(page.getByRole('button', { name: 'Annuler' })).toHaveCount(0);
     await expect(cinq).toHaveCount(0);
@@ -277,7 +273,7 @@ test.describe('onglet Score, MOD-04, MOD-05, MOD-07, GEN-09', () => {
     await expect(page.getByLabel('Points')).toHaveCount(0);
     await page.getByRole('tab', { name: 'Score' }).click();
     await page
-      .getByRole('button', { name: 'Retirer la dernière saisie' })
+      .getByRole('button', { name: 'Retirer le dernier tour' })
       .first()
       .click();
     await page.getByRole('tab', { name: 'Saisie' }).click();

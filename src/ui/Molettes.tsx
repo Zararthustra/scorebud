@@ -1,6 +1,6 @@
 import { useState, type KeyboardEvent } from 'react';
 import { Icone } from './Icone';
-import { CHIFFRES, depuisChiffres, versChiffres, type Signe } from './molettes';
+import { CHIFFRES, depuisChiffres, versChiffres, type Signe } from './chiffres';
 
 const NOMS = [
   'Centaines de milliers',

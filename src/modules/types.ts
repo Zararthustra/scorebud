@@ -8,7 +8,7 @@ export type PropsSaisie<B> = {
   majBrouillon: (b: B) => void;
   ajouterSaisie: (
     points: Points,
-    toast: { message: string; voirScore?: boolean }
+    toast?: { message: string; voirScore?: boolean }
   ) => void;
 };
 
@@ -20,6 +20,8 @@ export type ModuleDeJeu<B = unknown> = DefinitionPartie<B> & {
   route: string;
   participants: { genre: 'joueurs' | 'equipes'; min: number; max?: number }; // max absent : sans limite
   retirerDerniereSaisie: boolean;
+  // ADR-011 : libellés propres au jeu ; par défaut « Manche » et « Retirer la dernière saisie ».
+  vocabulaire?: { ligne?: string; retirer?: string };
   ongletsSaisie: {
     id: string;
     libelle: string;

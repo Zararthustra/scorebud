@@ -84,7 +84,7 @@ test('GEN-01 : changer de jeu ne perd rien', async ({ page }) => {
   await page.getByRole('link', { name: /^Jeu factice/ }).click();
   await page.getByRole('tab', { name: 'Score' }).click();
   await expect(page.getByRole('columnheader')).toHaveText([
-    'Manche',
+    'Tour',
     'Alice',
     'Bruno'
   ]);
@@ -119,7 +119,7 @@ test.describe('GEN-02, GEN-03, GEN-10 : stockage', () => {
     ).toBeVisible();
     await page.getByRole('tab', { name: 'Score' }).click();
     await expect(page.getByRole('columnheader')).toHaveText([
-      'Manche',
+      'Tour',
       'Alice',
       'Bruno'
     ]);
@@ -141,7 +141,7 @@ test.describe('GEN-02, GEN-03, GEN-10 : stockage', () => {
             { id: 'b', nom: 'Bruno' }
           ],
           saisies: [],
-          brouillon: null
+          brouillon: { valeurs: null }
         })
       );
     });

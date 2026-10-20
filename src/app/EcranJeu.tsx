@@ -87,16 +87,17 @@ export function EcranJeu({ module }: { module: ModuleDeJeu }) {
             saisies: [...actuelle.saisies, { points }],
             brouillon: module.brouillonVide()
           });
-          afficherToast({
-            type: 'success',
-            message: toast.message,
-            action: toast.voirScore
-              ? {
-                  libelle: 'Voir le score',
-                  faire: () => changerOnglet('score')
-                }
-              : undefined
-          });
+          if (toast)
+            afficherToast({
+              type: 'success',
+              message: toast.message,
+              action: toast.voirScore
+                ? {
+                    libelle: 'Voir le score',
+                    faire: () => changerOnglet('score')
+                  }
+                : undefined
+            });
         }}
       />
     )
@@ -118,9 +119,9 @@ export function EcranJeu({ module }: { module: ModuleDeJeu }) {
       contenu: <OngletRegles module={module} />
     }
   ];
-  // Un module sans saisie ni règles (compteur générique) affiche directement son tableau (spec 01 §9).
+  // Un module sans règles et avec une seule saisie (compteur générique) affiche son tableau puis sa saisie, sans onglets (spec 01 §9).
   const sansOnglets =
-    !vues.length && !module.Regles && !module.liensRegles.length;
+    vues.length <= 1 && !module.Regles && !module.liensRegles.length;
   const onglet = onglets.some((o) => o.id === p.onglet)
     ? p.onglet!
     : onglets[0].id;
@@ -142,7 +143,10 @@ export function EcranJeu({ module }: { module: ModuleDeJeu }) {
       )}
       <main className="sb-page">
         {sansOnglets ? (
-          score
+          <>
+            {score}
+            {vues[0]?.contenu}
+          </>
         ) : (
           <Tabs
             libelle={module.nom}
