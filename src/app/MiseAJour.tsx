@@ -23,10 +23,8 @@ export function MiseAJour() {
     <div className="sb-mise-a-jour" role="status">
       <Icone nom="info" />
       <span className="sb-mise-a-jour__texte">Nouvelle version disponible</span>
-      <Button
-        variante="primary"
-        taille="compact"
-        onClick={() => updateServiceWorker(true)}>
+      {/* Secondaire : l'écran garde son unique action principale (design system, Button). */}
+      <Button taille="compact" onClick={() => updateServiceWorker(true)}>
         Mettre à jour
       </Button>
       <Button

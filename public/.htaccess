@@ -1,0 +1,5 @@
+# ADR-007 : application à une page, les routes sans « # » (/scores, /belote-contree…) renvoient index.html.
+RewriteEngine On
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^ index.html [L]
