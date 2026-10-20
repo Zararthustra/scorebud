@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="fr">
   <head>
     <meta charset="UTF-8" />
@@ -15,7 +15,9 @@
             theme = JSON.parse(localStorage.getItem('scorebud:v2:prefs')).theme;
           } catch (e) {}
           document.documentElement.dataset.theme =
-            theme === 'sombre' || (theme !== 'clair' && systeme.matches) ? 'dark' : 'light';
+            theme === 'sombre' || (theme !== 'clair' && systeme.matches)
+              ? 'dark'
+              : 'light';
         }
         appliquer();
         systeme.addEventListener('change', appliquer);

@@ -1,8 +1,11 @@
 /* Mise en page de l'application ; tokens.css et components.css restent des copies du design system. */
 :root {
   /* @fontsource-variable déclare « Fredoka Variable » et « Figtree Variable », tokens.css attend « Fredoka » et « Figtree ». */
-  --font-display: 'Fredoka Variable', 'Fredoka', 'Nunito', ui-rounded, system-ui, sans-serif;
-  --font-text: 'Figtree Variable', 'Figtree', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --font-display:
+    'Fredoka Variable', 'Fredoka', 'Nunito', ui-rounded, system-ui, sans-serif;
+  --font-text:
+    'Figtree Variable', 'Figtree', system-ui, -apple-system, 'Segoe UI',
+    sans-serif;
 }
 
 [data-theme='dark'] {
