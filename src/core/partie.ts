@@ -56,3 +56,54 @@ export function validerNom(
     ? { erreur: 'Ce nom est déjà pris. Choisissez-en un autre.' }
     : { nom };
 }
+
+export const partieVide = <B>(brouillon: B): Partie<B> => ({
+  schemaVersion: 1,
+  participants: [],
+  saisies: [],
+  brouillon
+});
+
+/** MOD-05 : garde les participants, vide saisies et brouillon. */
+export const nouvellePartie = <B>(
+  p: Partie<B>,
+  brouillonVide: () => B
+): Partie<B> => ({
+  ...p,
+  saisies: [],
+  brouillon: brouillonVide()
+});
+
+/** MOD-04 */
+export const retirerDerniereSaisie = <B>(p: Partie<B>): Partie<B> => ({
+  ...p,
+  saisies: p.saisies.slice(0, -1)
+});
+
+const estObjet = (v: unknown): v is Record<string, unknown> =>
+  typeof v === 'object' && v !== null && !Array.isArray(v);
+
+/** Lecture défensive du stockage (spec 00 §5) : toute structure inattendue est refusée. */
+export function estPartie<B>(
+  v: unknown,
+  estBrouillon: (b: unknown) => b is B
+): v is Partie<B> {
+  return (
+    estObjet(v) &&
+    v.schemaVersion === 1 &&
+    Array.isArray(v.participants) &&
+    v.participants.every(
+      (p) =>
+        estObjet(p) && typeof p.id === 'string' && typeof p.nom === 'string'
+    ) &&
+    Array.isArray(v.saisies) &&
+    v.saisies.every(
+      (s) =>
+        estObjet(s) &&
+        estObjet(s.points) &&
+        Object.values(s.points).every(Number.isFinite)
+    ) &&
+    estBrouillon(v.brouillon) &&
+    (v.onglet === undefined || typeof v.onglet === 'string')
+  );
+}
