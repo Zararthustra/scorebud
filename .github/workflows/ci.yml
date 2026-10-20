@@ -1,0 +1,100 @@
+# Une seule CI (phase 6, ADR-007) :
+# - à chaque push et pull request : vérifier (lint, types + build, tests unitaires, tests e2e) ;
+# - sur un tag de version (vX.Y.Z, créé par `npm run release`) : publier le dist/ vérifié sur la branche prod,
+#   que le hook du serveur récupère.
+name: CI
+
+on:
+  push:
+    branches: ['**']
+    tags: ['v*']
+  pull_request:
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  verifier:
+    name: Vérifier
+    runs-on: ubuntu-latest
+    steps:
+      - name: Récupérer le code
+        uses: actions/checkout@v4
+
+      - name: Installer Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+
+      - name: Installer les dépendances
+        run: npm ci
+
+      - name: Lint
+        run: npm run lint
+
+      - name: Types et build de production
+        run: npm run build
+
+      - name: Garder le build de production
+        uses: actions/upload-artifact@v4
+        with:
+          name: dist
+          path: dist
+          retention-days: 7
+
+      - name: Tests unitaires (Vitest)
+        run: npm test
+
+      - name: Installer Chromium
+        run: npx playwright install --with-deps chromium
+
+      - name: Tests de bout en bout et accessibilité (Playwright + axe)
+        run: npm run test:e2e
+
+      - name: Rapport Playwright en cas d'échec
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: rapport-playwright
+          path: |
+            playwright-report
+            test-results
+          retention-days: 7
+
+  deployer:
+    name: Déployer sur la branche prod
+    needs: verifier
+    if: startsWith(github.ref, 'refs/tags/v')
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - name: Récupérer le code
+        uses: actions/checkout@v4
+
+      - name: Récupérer le build vérifié
+        uses: actions/download-artifact@v4
+        with:
+          name: dist
+          path: dist
+
+      - name: Publier dist/ sur prod (un commit par version)
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          if git fetch --depth=1 origin prod; then
+            git worktree add site FETCH_HEAD
+          else
+            git worktree add --detach site
+            git -C site checkout --orphan prod
+          fi
+          git -C site rm -rf --quiet --ignore-unmatch .
+          cp -r dist/. site/
+          git -C site add -A
+          git -C site commit -m "deploy: ${GITHUB_REF_NAME}"
+          git -C site push origin HEAD:prod
+
+      - name: Résumé
+        run: echo "Version ${GITHUB_REF_NAME} publiée sur la branche prod." >> "$GITHUB_STEP_SUMMARY"

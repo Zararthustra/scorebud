@@ -1,12 +1,13 @@
 import { defineConfig } from '@playwright/test';
 
+// Une seule adresse IPv4 des deux côtés : « localhost » pouvait viser ::1 alors que le serveur écoutait en IPv4 (ERR_CONNECTION_REFUSED intermittent).
+const ADRESSE = 'http://127.0.0.1:4173';
+
 // Téléphone posé sur la table : Chromium émulé en mobile 390 × 844 (plan technique §10, Q11).
 export default defineConfig({
   testDir: 'tests/e2e',
-  // Relances en CI seulement : un échec isolé de CON-01 vu une fois en local au lot 7, non reproduit ensuite.
-  retries: process.env.CI ? 2 : 0,
   use: {
-    baseURL: 'http://localhost:4173',
+    baseURL: ADRESSE,
     browserName: 'chromium',
     viewport: { width: 390, height: 844 },
     isMobile: true,
@@ -17,8 +18,8 @@ export default defineConfig({
   webServer: {
     // Build de test : le module factice n'y est compilé qu'en mode e2e (MOD-01).
     command:
-      'npx tsc && npx vite build --mode e2e && npx vite preview --port 4173 --strictPort',
-    url: 'http://localhost:4173',
+      'npx tsc && npx vite build --mode e2e && npx vite preview --host 127.0.0.1 --port 4173 --strictPort',
+    url: ADRESSE,
     reuseExistingServer: !process.env.CI
   }
 });
