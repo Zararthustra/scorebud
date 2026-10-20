@@ -26,12 +26,22 @@ const enCours: Partie<B> = {
 };
 
 let donnees: Map<string, string>;
+let plein: boolean;
 beforeEach(() => {
   donnees = new Map();
   vi.stubGlobal('localStorage', {
     getItem: (k: string) => donnees.get(k) ?? null,
-    setItem: (k: string, v: string) => void donnees.set(k, v)
+    setItem: (k: string, v: string) => {
+      if (plein) throw new Error('QuotaExceededError');
+      donnees.set(k, v);
+    },
+    removeItem: (k: string) => void donnees.delete(k),
+    key: (i: number) => [...donnees.keys()][i] ?? null,
+    get length() {
+      return donnees.size;
+    }
   });
+  plein = false;
   vi.useFakeTimers();
 });
 afterEach(() => vi.useRealTimers());
@@ -158,4 +168,87 @@ describe('transformations', () => {
       { points: { a: 1, b: 2 } }
     ]);
   });
+});
+
+describe('T1 : ce qui ne rend pas l’action définitive', () => {
+  test('changer d’onglet ou de brouillon garde Annuler ; Annuler garde l’onglet ouvert', () => {
+    const m = creerMagasin();
+    m.modifier(jeu, enCours);
+    m.faireAnnulable(
+      jeu,
+      retirerDerniereSaisie(m.partie(jeu)),
+      'Saisie retirée'
+    );
+    m.modifier(jeu, {
+      ...m.partie(jeu),
+      onglet: 'regles',
+      brouillon: { n: 1 }
+    });
+    expect(m.annulable()).not.toBeNull();
+    m.annuler();
+    expect(m.partie(jeu)).toEqual({ ...enCours, onglet: 'regles' });
+  });
+});
+
+describe('préférences', () => {
+  test('par défaut : thème système, aucun récent', () => {
+    expect(creerMagasin().preferences()).toEqual({
+      schemaVersion: 1,
+      theme: 'systeme',
+      recents: []
+    });
+  });
+  test('écrites et relues', () => {
+    creerMagasin().modifierPreferences({
+      schemaVersion: 1,
+      theme: 'sombre',
+      recents: ['test']
+    });
+    expect(creerMagasin().preferences().theme).toBe('sombre');
+  });
+  test('illisibles : valeurs par défaut', () => {
+    donnees.set(
+      'scorebud:v2:prefs',
+      '{"schemaVersion":1,"theme":"rose","recents":[]}'
+    );
+    expect(creerMagasin().preferences().theme).toBe('systeme');
+  });
+});
+
+describe('erreurs de stockage', () => {
+  test('GEN-03 : écriture impossible signalée, l’application continue en mémoire', () => {
+    const m = creerMagasin();
+    plein = true;
+    m.modifier(jeu, enCours);
+    expect(m.nonEnregistre()).toBe(true);
+    expect(m.partie(jeu)).toEqual(enCours);
+    plein = false;
+    m.modifier(jeu, enCours);
+    expect(m.nonEnregistre()).toBe(false);
+  });
+  test('GEN-03 : partie illisible signalée une seule fois', () => {
+    donnees.set('scorebud:v2:test', '{illisible');
+    const surIllisible = vi.fn();
+    const m = creerMagasin(surIllisible);
+    m.partie(jeu);
+    m.partie(jeu);
+    m.partie(autre);
+    expect(surIllisible).toHaveBeenCalledTimes(1);
+    expect(surIllisible).toHaveBeenCalledWith('test');
+  });
+});
+
+test('GEN-07 : effacer tout vide le stockage et la mémoire', () => {
+  const m = creerMagasin();
+  m.modifier(jeu, enCours);
+  m.modifierPreferences({
+    schemaVersion: 1,
+    theme: 'clair',
+    recents: ['test']
+  });
+  donnees.set('autre-site', 'garde');
+  m.effacerTout();
+  expect([...donnees.keys()]).toEqual(['autre-site']);
+  expect(m.partie(jeu).participants).toEqual([]);
+  expect(m.preferences().theme).toBe('systeme');
 });

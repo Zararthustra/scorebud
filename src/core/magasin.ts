@@ -1,5 +1,5 @@
 import { estPartie, partieVide, type Partie } from './partie';
-import { ecrire, lire } from './stockage';
+import { ecrire, effacerTout as effacerStockage, lire } from './stockage';
 
 /** Ce que le magasin doit savoir d'un module pour lire sa partie. */
 export type DefinitionPartie<B> = {
@@ -8,14 +8,37 @@ export type DefinitionPartie<B> = {
   estBrouillon: (v: unknown) => v is B;
 };
 
+export type Theme = 'systeme' | 'clair' | 'sombre';
+export type Preferences = { schemaVersion: 1; theme: Theme; recents: string[] };
+
 export const DELAI_ANNULATION = 5000;
 
 const cle = (id: string) => `scorebud:v2:${id}`;
+const CLE_PREFS = cle('prefs');
+const prefsParDefaut = (): Preferences => ({
+  schemaVersion: 1,
+  theme: 'systeme',
+  recents: []
+});
+
+const estPreferences = (v: unknown): v is Preferences => {
+  const p = v as Preferences;
+  return (
+    typeof v === 'object' &&
+    v !== null &&
+    p.schemaVersion === 1 &&
+    ['systeme', 'clair', 'sombre'].includes(p.theme) &&
+    Array.isArray(p.recents) &&
+    p.recents.every((r) => typeof r === 'string')
+  );
+};
 
 /** Une partie par module, en mémoire et écrite à chaque changement ; annulation T1 en un seul endroit. */
-export function creerMagasin() {
+export function creerMagasin(surIllisible: (id: string) => void = () => {}) {
   const parties = new Map<string, Partie<unknown>>();
   const abonnes = new Set<() => void>();
+  let prefs: Preferences | undefined;
+  let nonEnregistre = false;
   let annulable: {
     id: string;
     message: string;
@@ -30,24 +53,35 @@ export function creerMagasin() {
     annulable = null;
   };
 
+  const persister = (c: string, valeur: unknown) => {
+    nonEnregistre = !ecrire(c, valeur);
+  };
+
   function partie<B>(def: DefinitionPartie<B>): Partie<B> {
     if (!parties.has(def.id)) {
-      const { valeur } = lire(cle(def.id), (v): v is Partie<B> =>
+      const { valeur, illisible } = lire(cle(def.id), (v): v is Partie<B> =>
         estPartie(v, def.estBrouillon)
       );
       parties.set(def.id, valeur ?? partieVide(def.brouillonVide()));
+      if (illisible) surIllisible(def.id);
     }
     return parties.get(def.id) as Partie<B>;
   }
 
   function enregistrer(id: string, p: Partie<unknown>) {
     parties.set(id, p);
-    ecrire(cle(id), p);
+    persister(cle(id), p);
   }
 
-  /** Une modification de la partie rend définitive l'action annulable en cours sur elle : Annuler ne doit rien effacer de plus récent. */
+  /** Changer saisies ou participants rend définitive l'action annulable en cours sur la partie : Annuler ne doit rien effacer de plus récent. */
   function modifier<B>(def: DefinitionPartie<B>, p: Partie<B>) {
-    if (annulable?.id === def.id) oublierAnnulable();
+    const actuelle = partie(def);
+    if (
+      annulable?.id === def.id &&
+      (p.saisies !== actuelle.saisies ||
+        p.participants !== actuelle.participants)
+    )
+      oublierAnnulable();
     enregistrer(def.id, p);
     notifier();
   }
@@ -68,11 +102,33 @@ export function creerMagasin() {
     notifier();
   }
 
+  /** Restaure l'état d'avant l'action, en gardant l'onglet ouvert depuis. */
   function annuler() {
     if (!annulable) return;
     const { id, avant } = annulable;
     oublierAnnulable();
-    enregistrer(id, avant);
+    enregistrer(id, { ...avant, onglet: parties.get(id)?.onglet });
+    notifier();
+  }
+
+  function preferences(): Preferences {
+    prefs ??= lire(CLE_PREFS, estPreferences).valeur ?? prefsParDefaut();
+    return prefs;
+  }
+
+  function modifierPreferences(p: Preferences) {
+    prefs = p;
+    persister(CLE_PREFS, p);
+    notifier();
+  }
+
+  /** GEN-07 : stockage et mémoire repartent de zéro. */
+  function effacerTout() {
+    effacerStockage();
+    oublierAnnulable();
+    parties.clear();
+    prefs = undefined;
+    nonEnregistre = false;
     notifier();
   }
 
@@ -82,9 +138,15 @@ export function creerMagasin() {
     faireAnnulable,
     annuler,
     annulable: () => annulable,
+    preferences,
+    modifierPreferences,
+    effacerTout,
+    nonEnregistre: () => nonEnregistre,
     abonner(f: () => void) {
       abonnes.add(f);
       return () => void abonnes.delete(f);
     }
   };
 }
+
+export type Magasin = ReturnType<typeof creerMagasin>;
