@@ -27,6 +27,12 @@
   --player-4: #9a7403; /* Repère de couleur du joueur 4 (pastille, filet de colonne). 3:1 minimum sur `surface` et `raised`. Jamais seule : le nom du joueur l'accompagne, et jamais de texte posé dessus. */
   --player-5: #048b91; /* Repère de couleur du joueur 5 (pastille, filet de colonne). 3:1 minimum sur `surface` et `raised`. Jamais seule : le nom du joueur l'accompagne, et jamais de texte posé dessus. */
   --player-6: #8b5dce; /* Repère de couleur du joueur 6 (pastille, filet de colonne). 3:1 minimum sur `surface` et `raised`. Jamais seule : le nom du joueur l'accompagne, et jamais de texte posé dessus. */
+  --player-7: #c25510; /* Repère de couleur du joueur 7 (pastille, filet de colonne). 3:1 minimum sur `surface` et `raised`. Jamais seule : le nom du joueur l'accompagne, et jamais de texte posé dessus. Au-delà de 12 joueurs, la série recommence à `player-1`. */
+  --player-8: #4f5bd5; /* Repère de couleur du joueur 8 (pastille, filet de colonne). 3:1 minimum sur `surface` et `raised`. Jamais seule : le nom du joueur l'accompagne, et jamais de texte posé dessus. Au-delà de 12 joueurs, la série recommence à `player-1`. */
+  --player-9: #6c7a0e; /* Repère de couleur du joueur 9 (pastille, filet de colonne). 3:1 minimum sur `surface` et `raised`. Jamais seule : le nom du joueur l'accompagne, et jamais de texte posé dessus. Au-delà de 12 joueurs, la série recommence à `player-1`. */
+  --player-10: #8e5a34; /* Repère de couleur du joueur 10 (pastille, filet de colonne). 3:1 minimum sur `surface` et `raised`. Jamais seule : le nom du joueur l'accompagne, et jamais de texte posé dessus. Au-delà de 12 joueurs, la série recommence à `player-1`. */
+  --player-11: #5a6b7e; /* Repère de couleur du joueur 11 (pastille, filet de colonne). 3:1 minimum sur `surface` et `raised`. Jamais seule : le nom du joueur l'accompagne, et jamais de texte posé dessus. Au-delà de 12 joueurs, la série recommence à `player-1`. */
+  --player-12: #c22f3a; /* Repère de couleur du joueur 12 (pastille, filet de colonne). 3:1 minimum sur `surface` et `raised`. Jamais seule : le nom du joueur l'accompagne, et jamais de texte posé dessus. Au-delà de 12 joueurs, la série recommence à `player-1`. */
   --shadow-1: 0 1px 2px 0 rgba(22,15,18,0.14), 0 2px 6px 0 rgba(22,15,18,0.08); /* Élément posé : carte, puce sélectionnée. */
   --shadow-2: 0 2px 4px 0 rgba(22,15,18,0.14), 0 8px 16px 0 rgba(22,15,18,0.12), 0 16px 32px 0 rgba(22,15,18,0.08); /* Toast, menu : au-dessus du contenu. */
   --shadow-3: 0 2px 4px 0 rgba(22,15,18,0.16), 0 12px 24px 0 rgba(22,15,18,0.16), 0 32px 64px 0 rgba(22,15,18,0.14); /* Feuille ouverte (le plus haut). */
@@ -59,6 +65,12 @@
   --player-4: #d3a329;
   --player-5: #11c2ca;
   --player-6: #b995f6;
+  --player-7: #ff9a52;
+  --player-8: #8f99ff;
+  --player-9: #b4c444;
+  --player-10: #d59b6f;
+  --player-11: #a2b2c6;
+  --player-12: #ff7b82;
 }
 :root {
   --space-1: 4px; /* Écart minimal (icône et libellé serrés). */
@@ -89,6 +101,7 @@
   --font-text: "Figtree", system-ui, -apple-system, "Segoe UI", sans-serif;
   --text-score-xl: 700 72px/72px var(--font-display); /* Le nombre d'un compteur en plein écran (points de la manche). */
   --text-score-l: 700 48px/48px var(--font-display); /* Nombre d'un compteur dans une grille, total du tableau. */
+  --text-score-m: 600 28px/32px var(--font-display); /* Nombre d'un compteur en liste, à côté d'une icône (ressources, conditions de victoire). Plus discret que `score-l`. */
   --text-h1: 700 32px/36px var(--font-display); /* Titre d'écran, deux fois le corps de texte. */
   --text-h2: 600 24px/28px var(--font-display); /* Titre de section, de feuille. */
   --text-h3: 600 20px/24px var(--font-display); /* Titre de groupe de champs, de carte. */
@@ -110,6 +123,13 @@
   font-size: 48px;
   line-height: 48px;
   font-weight: 700;
+  letter-spacing: 0;
+}
+.score-m {
+  font-family: var(--font-display);
+  font-size: 28px;
+  line-height: 32px;
+  font-weight: 600;
   letter-spacing: 0;
 }
 .h1 {

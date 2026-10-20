@@ -25,3 +25,13 @@ body {
   min-height: 100dvh;
   margin: 0 auto;
 }
+
+/* Fredoka n'a pas de chiffres tabulaires (mesuré en T1) : les nombres des compteurs et des totaux passent en Figtree, Fredoka reste aux titres (décision d'Arthur, 2026-10-20). */
+.sb-counter__value,
+.sb-table tfoot td,
+.score-xl,
+.score-l,
+.score-m {
+  font-family: var(--font-text);
+  font-variant-numeric: tabular-nums;
+}
