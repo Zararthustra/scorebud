@@ -395,14 +395,17 @@ a.sb-btn {
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: var(--touch-min);
+  /* 44px au plus ; sur un écran étroit (320px) les 7 colonnes rétrécissent au lieu de déborder. */
+  flex: 1 1 0;
+  min-width: 0;
+  max-width: var(--touch-min);
 }
 .sb-roue__fleche {
   all: unset;
   box-sizing: border-box;
   display: grid;
   place-items: center;
-  width: var(--touch-min);
+  width: 100%;
   height: var(--touch-min);
   border-radius: var(--radius-full);
   color: var(--brand-text);
@@ -416,7 +419,9 @@ a.sb-btn {
 .sb-roue__valeur {
   display: grid;
   place-items: center;
-  width: 40px;
+  box-sizing: border-box;
+  width: 100%;
+  max-width: 40px;
   height: 52px;
   border-radius: var(--radius-sm);
   background: var(--raised);

@@ -3,6 +3,8 @@ import { defineConfig } from '@playwright/test';
 // Téléphone posé sur la table : Chromium émulé en mobile 390 × 844 (plan technique §10, Q11).
 export default defineConfig({
   testDir: 'tests/e2e',
+  // Relances en CI seulement : un échec isolé de CON-01 vu une fois en local au lot 7, non reproduit ensuite.
+  retries: process.env.CI ? 2 : 0,
   use: {
     baseURL: 'http://localhost:4173',
     browserName: 'chromium',
