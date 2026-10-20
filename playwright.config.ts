@@ -11,7 +11,8 @@ export default defineConfig({
     hasTouch: true
   },
   webServer: {
-    command: 'npm run build && npm run preview -- --port 4173 --strictPort',
+    // Build de test : le module factice n'y est compilé qu'en mode e2e (MOD-01).
+    command: 'npx tsc && npx vite build --mode e2e && npx vite preview --port 4173 --strictPort',
     url: 'http://localhost:4173',
     reuseExistingServer: !process.env.CI
   }

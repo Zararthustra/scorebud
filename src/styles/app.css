@@ -35,3 +35,397 @@ body {
   font-family: var(--font-text);
   font-variant-numeric: tabular-nums;
 }
+
+/* Base */
+h1,
+h2,
+h3,
+p {
+  margin: 0;
+}
+a {
+  color: var(--brand-text);
+}
+a:hover {
+  color: var(--brand-hover);
+}
+a.sb-btn {
+  text-decoration: none;
+}
+.sb-muted {
+  color: var(--fg-muted);
+}
+.sb-stack--serre {
+  gap: var(--space-2);
+}
+.sb-row--serre {
+  flex-wrap: nowrap;
+  gap: var(--space-2);
+}
+.sb-fixe {
+  flex: none;
+}
+.sb-debut {
+  align-self: flex-start;
+}
+.sb-fin-de-ligne {
+  align-self: flex-end;
+}
+.sb-section {
+  padding-top: var(--space-5);
+  border-top: 1px solid var(--border);
+}
+.sb-btn-icone {
+  width: var(--touch-min);
+  padding: 0;
+}
+.sb-liste {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+.sb-liste--serree {
+  gap: var(--space-2);
+}
+.sb-liste--nue {
+  gap: 0;
+}
+
+/* Barre du haut (maquette GameBar) */
+.sb-barre {
+  display: flex;
+  align-items: center;
+  gap: var(--space-1);
+  min-height: 64px;
+  padding: 0 var(--space-2) 0 var(--space-1);
+}
+.sb-barre__logo {
+  height: 36px;
+  margin: 0 var(--space-2) 0 var(--space-3);
+}
+.sb-barre__titre {
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.sb-bandeau {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  margin: 0 var(--space-4);
+  padding: var(--space-2) var(--space-3);
+  border-radius: var(--radius-md);
+  background: var(--surface);
+  box-shadow: inset 0 0 0 1.5px var(--border-strong);
+  color: var(--warning);
+  font: var(--text-label);
+}
+
+/* Pages */
+.sb-page {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+  padding: var(--space-2) var(--space-4) var(--space-6);
+}
+.sb-page__titre {
+  margin-top: var(--space-2);
+}
+.sb-page--centre {
+  min-height: 100dvh;
+  box-sizing: border-box;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-6) var(--space-8) 120px;
+  text-align: center;
+}
+.sb-vide {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-4);
+  padding: var(--space-8) var(--space-6);
+  text-align: center;
+}
+
+/* Cartes du catalogue et liens de règles (maquettes Main, LF-regles) */
+.sb-carte {
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+  min-height: 88px;
+  padding: var(--space-4);
+  box-sizing: border-box;
+  border-radius: var(--radius-lg);
+  background: var(--surface);
+  box-shadow: var(--shadow-1);
+  color: var(--fg);
+  text-decoration: none;
+}
+.sb-carte:hover {
+  color: var(--fg);
+}
+.sb-carte > svg {
+  color: var(--fg-muted);
+}
+.sb-carte:focus-visible,
+.sb-nom:focus-visible,
+.sb-menu__element:focus-visible {
+  outline: 2px solid var(--focus);
+  outline-offset: 2px;
+}
+.sb-carte__icone {
+  flex: none;
+  display: grid;
+  place-items: center;
+  width: 52px;
+  height: 52px;
+  border-radius: var(--radius-md);
+  background: var(--brand-soft);
+  color: var(--brand-text);
+}
+.sb-carte__texte {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+.sb-carte__description {
+  color: var(--fg-muted);
+}
+.sb-carte__statut {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: var(--space-1);
+  font: var(--text-label);
+  color: var(--brand-text);
+}
+.sb-carte__puce {
+  width: 8px;
+  height: 8px;
+  border-radius: var(--radius-full);
+  background: var(--brand-text);
+}
+.sb-carte--libre {
+  min-height: 96px;
+  padding: var(--space-4) var(--space-5);
+  background: var(--brand-soft);
+  box-shadow: inset 0 0 0 2px var(--brand-text);
+}
+.sb-carte--libre .sb-carte__icone {
+  background: var(--brand);
+  color: var(--on-brand);
+}
+.sb-carte--libre .sb-carte__description {
+  color: var(--fg);
+}
+.sb-carte--libre > svg {
+  color: var(--brand-text);
+}
+.sb-carte--lien {
+  min-height: 64px;
+  padding: var(--space-3) var(--space-4);
+  border-radius: var(--radius-md);
+}
+.sb-carte--lien > svg {
+  color: var(--brand-text);
+}
+
+/* Feuilles et dialogues sur <dialog> natif */
+.sb-dialog {
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: var(--fg);
+  max-width: 480px;
+  max-height: 100dvh;
+}
+.sb-dialog::backdrop {
+  background: var(--scrim);
+}
+.sb-dialog--sheet {
+  width: 100%;
+  margin: auto auto 0;
+}
+.sb-dialog--sheet .sb-sheet {
+  max-height: 90dvh;
+  overflow-y: auto;
+  box-sizing: border-box;
+  animation: sb-sheet-in var(--duration-slow) var(--ease-out);
+}
+@keyframes sb-sheet-in {
+  from {
+    transform: translateY(100%);
+  }
+}
+.sb-sheet__titre {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--space-3);
+}
+.sb-dialog--alerte {
+  width: calc(100% - 2 * var(--space-5));
+}
+.sb-alerte {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+  padding: var(--space-6);
+  border-radius: var(--radius-lg);
+  background: var(--raised);
+  box-shadow: var(--shadow-3);
+}
+.sb-alerte__icone {
+  display: inline-flex;
+  color: var(--danger);
+}
+.sb-menu__element {
+  all: unset;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+  width: 100%;
+  min-height: 56px;
+  padding: 0 var(--space-3);
+  border-radius: var(--radius-md);
+  cursor: pointer;
+}
+.sb-menu__element:hover {
+  background: var(--brand-soft);
+}
+.sb-menu__element > svg {
+  color: var(--brand-text);
+}
+.sb-ligne-joueur {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-3);
+  min-height: var(--touch-comfort);
+  padding: 0 var(--space-1) 0 var(--space-4);
+  border-radius: var(--radius-md);
+  background: var(--surface);
+  box-shadow: inset 0 0 0 1px var(--border);
+}
+.sb-ligne-joueur .sb-btn-icone {
+  color: var(--fg-muted);
+}
+.sb-field--large {
+  max-width: none;
+}
+
+/* Tableau : en-têtes et première colonne restent visibles au défilement (spec 01 §7) */
+.sb-table thead th,
+.sb-table td:first-child {
+  position: sticky;
+  background: var(--surface);
+}
+.sb-table thead th {
+  top: 0;
+}
+.sb-table td:first-child,
+.sb-table th:first-child {
+  left: 0;
+  z-index: 1;
+}
+.sb-nom {
+  all: unset;
+  box-sizing: border-box;
+  display: inline-flex;
+  align-items: center;
+  min-height: var(--touch-min);
+  cursor: pointer;
+}
+
+/* Fin de partie (maquette Contree-fin) */
+.sb-fin {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-3);
+  padding: 28px var(--space-5);
+  text-align: center;
+  border-radius: var(--radius-lg);
+  background: var(--surface);
+  box-shadow:
+    var(--shadow-2),
+    inset 0 0 0 2px var(--brand-text);
+}
+.sb-fin__titre {
+  color: var(--brand-text);
+}
+
+/* Toasts : en haut de l'écran, jamais au centre (README Toast) */
+.sb-toasts {
+  position: fixed;
+  top: 72px;
+  left: 0;
+  right: 0;
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  max-width: 480px;
+  margin: 0 auto;
+  padding: 0 var(--space-3);
+  box-sizing: border-box;
+  pointer-events: none;
+}
+.sb-toasts .sb-toast {
+  max-width: none;
+  pointer-events: auto;
+}
+
+/* Molettes (maquette Scores-molette) : un signe et 6 chiffres sur 44px chacun */
+.sb-molettes {
+  display: flex;
+  justify-content: center;
+  gap: 2px;
+}
+.sb-roue {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: var(--touch-min);
+}
+.sb-roue__fleche {
+  all: unset;
+  box-sizing: border-box;
+  display: grid;
+  place-items: center;
+  width: var(--touch-min);
+  height: var(--touch-min);
+  border-radius: var(--radius-full);
+  color: var(--brand-text);
+  cursor: pointer;
+}
+.sb-roue__voisin {
+  font: 600 18px/22px var(--font-text);
+  color: var(--fg-muted);
+  font-variant-numeric: tabular-nums;
+}
+.sb-roue__valeur {
+  display: grid;
+  place-items: center;
+  width: 40px;
+  height: 52px;
+  border-radius: var(--radius-sm);
+  background: var(--raised);
+  box-shadow: inset 0 0 0 1.5px var(--border-strong);
+  font: 700 32px/36px var(--font-text);
+  font-variant-numeric: tabular-nums;
+}
+.sb-roue__fleche:focus-visible,
+.sb-roue__valeur:focus-visible {
+  outline: 2px solid var(--focus);
+  outline-offset: 2px;
+}
