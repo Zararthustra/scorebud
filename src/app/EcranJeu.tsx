@@ -77,8 +77,14 @@ export function EcranJeu({ module }: { module: ModuleDeJeu }) {
     ) : (
       <Vue
         partie={p}
-        majBrouillon={(brouillon) =>
-          magasin.modifier(module, { ...magasin.partie(module), brouillon })
+        majBrouillon={(brouillon, annulable) =>
+          annulable
+            ? magasin.faireAnnulable(
+                module,
+                { ...magasin.partie(module), brouillon },
+                annulable
+              )
+            : magasin.modifier(module, { ...magasin.partie(module), brouillon })
         }
         ajouterSaisie={(points, toast) => {
           const actuelle = magasin.partie(module);
